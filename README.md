@@ -1,4 +1,4 @@
 Robust unit testing in Android
 ==============================
 
-This is sample project for Droidcon Kraków 2014.
+This is a sample project used in my presentation at Droidcon Kraków 2014.
