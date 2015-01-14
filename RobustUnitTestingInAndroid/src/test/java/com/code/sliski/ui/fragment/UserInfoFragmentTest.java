@@ -11,7 +11,6 @@ import org.robolectric.util.FragmentTestUtil;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(emulateSdk = 18, manifest = "././src/main/AndroidManifest.xml")
 public class UserInfoFragmentTest {
 
     private UserInfoFragment mUserInfoFragment;
