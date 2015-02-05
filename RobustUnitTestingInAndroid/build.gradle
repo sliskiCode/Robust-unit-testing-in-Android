@@ -1,10 +1,12 @@
 buildscript {
+    ext.kotlin_version = '0.10.195'
     repositories {
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.0.0'
         classpath 'com.github.jcandksolutions.gradle:android-unit-test:2.1.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -32,9 +34,14 @@ android {
         release {
         }
     }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 }
 
 apply plugin: 'android-unit-test'
+apply plugin: 'kotlin-android'
 
 dependencies {
     // App
@@ -47,6 +54,9 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'de.greenrobot:eventbus:2.2.1'
+
+    // Kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // Robolectric
     testCompile 'junit:junit:4.11'

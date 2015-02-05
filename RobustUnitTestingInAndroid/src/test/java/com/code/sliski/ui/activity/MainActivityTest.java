@@ -2,20 +2,15 @@ package com.code.sliski.ui.activity;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
-import com.code.sliski.ui.AppModule;
 import com.code.sliski.ui.R;
-import com.code.sliski.ui.TestApp;
-import com.code.sliski.ui.TestAppModule;
 import com.code.sliski.ui.fragment.UserIdFragment;
 import com.code.sliski.ui.fragment.UserInfoFragment;
 import com.code.sliski.ui.preference.PrefManager;
-import dagger.ObjectGraph;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertTrue;
 
