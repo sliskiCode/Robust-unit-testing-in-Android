@@ -1,11 +1,12 @@
 package com.code.sliski.ui;
 
 import android.content.Context;
-import com.code.sliski.ui.api.StackoverflowApi;
-import com.code.sliski.ui.api.StackoverflowClient;
+import com.code.sliski.api.Client;
+import com.code.sliski.api.StackoverflowApi;
+import com.code.sliski.api.StackoverflowClient;
 import com.code.sliski.ui.fragment.PostDetailsFragment;
 import com.code.sliski.ui.fragment.PostListFragment;
-import com.code.sliski.ui.model.Post;
+import com.code.sliski.model.Post;
 import com.code.sliski.ui.preference.PrefManager;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -43,7 +44,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public StackoverflowClient provideStackoverflowClient(StackoverflowApi api, EventBus eventBus) {
+    public Client provideClient(StackoverflowApi api, EventBus eventBus) {
         return new StackoverflowClient(api, eventBus);
     }
 

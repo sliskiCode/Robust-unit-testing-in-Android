@@ -2,11 +2,10 @@ package com.code.sliski.ui.fragment;
 
 import android.widget.TextView;
 import com.code.sliski.ui.R;
-import com.code.sliski.ui.model.Post;
+import com.code.sliski.model.Post;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.FragmentTestUtil;
 
 import static org.junit.Assert.*;
@@ -17,11 +16,7 @@ public class PostDetailsFragmentTest {
     @SuppressWarnings("ConstantConditions")
     @Test
     public void viewsShouldDisplayInfoAboutPost() throws Exception {
-        PostDetailsFragment postDetailsFragment = PostDetailsFragment.getInstance(Post.Builder
-                .withPostId(1)
-                .withLink("www.stack.com/baaah")
-                .withScore(100)
-                .build());
+        PostDetailsFragment postDetailsFragment = PostDetailsFragment.Factory.getInstance(new Post(1, 100, "www.stack.com/baaah"));
         FragmentTestUtil.startFragment(postDetailsFragment);
         TextView score = ((TextView) postDetailsFragment.getView().findViewById(R.id.score));
         TextView link = ((TextView) postDetailsFragment.getView().findViewById(R.id.link));

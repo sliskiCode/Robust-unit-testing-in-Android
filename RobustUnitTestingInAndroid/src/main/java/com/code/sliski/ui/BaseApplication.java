@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import dagger.ObjectGraph;
 
-public class App extends Application {
+public class BaseApplication extends Application {
 
     protected ObjectGraph objectGraph;
 
@@ -19,7 +19,7 @@ public class App extends Application {
     }
 
     public static void inject(Context context, Object root) {
-        App app = (App) context.getApplicationContext();
-        app.objectGraph.inject(root);
+        BaseApplication baseApplication = (BaseApplication) context.getApplicationContext();
+        baseApplication.objectGraph.inject(root);
     }
 }

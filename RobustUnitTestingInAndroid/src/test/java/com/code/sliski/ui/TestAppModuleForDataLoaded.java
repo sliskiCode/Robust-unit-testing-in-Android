@@ -1,11 +1,12 @@
 package com.code.sliski.ui;
 
 import android.content.Context;
-import com.code.sliski.ui.api.StackoverflowApi;
-import com.code.sliski.ui.api.StackoverflowClient;
+import com.code.sliski.api.Client;
+import com.code.sliski.api.StackoverflowApi;
+import com.code.sliski.api.StackoverflowClient;
 import com.code.sliski.ui.fragment.PostDetailsFragmentTest;
 import com.code.sliski.ui.fragment.PostListFragmentTest;
-import com.code.sliski.ui.model.Post;
+import com.code.sliski.model.Post;
 import com.code.sliski.ui.preference.PrefManager;
 import com.google.gson.Gson;
 import com.tale.prettysharedpreferences.LongEditor;
@@ -43,18 +44,18 @@ public class TestAppModuleForDataLoaded {
     @Provides
     public ArrayList<Post> providePosts() {
         ArrayList<Post> posts = new ArrayList<Post>();
-        posts.add(Post.Builder.withPostId(1).withLink("www.1.com").withScore(1).build());
-        posts.add(Post.Builder.withPostId(2).withLink("www.2.com").withScore(2).build());
-        posts.add(Post.Builder.withPostId(3).withLink("www.3.com").withScore(3).build());
-        posts.add(Post.Builder.withPostId(4).withLink("www.4.com").withScore(4).build());
-        posts.add(Post.Builder.withPostId(5).withLink("www.5.com").withScore(5).build());
+        posts.add(new Post(1, 1 , "www.1.com"));
+        posts.add(new Post(2, 2 , "www.2.com"));
+        posts.add(new Post(3, 3 , "www.3.com"));
+        posts.add(new Post(4, 4 , "www.4.com"));
+        posts.add(new Post(5, 5 , "www.5.com"));
         return posts;
     }
 
     @Provides
     @Singleton
-    public StackoverflowClient provideStackoverflowClient(StackoverflowApi api, EventBus eventBus) {
-        return mock(StackoverflowClient.class);
+    public Client provideClient(StackoverflowApi api, EventBus eventBus) {
+        return mock(Client.class);
     }
 
     @Provides

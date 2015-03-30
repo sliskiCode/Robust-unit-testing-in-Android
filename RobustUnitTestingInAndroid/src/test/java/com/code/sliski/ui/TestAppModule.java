@@ -1,12 +1,11 @@
 package com.code.sliski.ui;
 
 import android.content.Context;
-import com.code.sliski.ui.api.StackoverflowApi;
-import com.code.sliski.ui.api.StackoverflowClient;
-import com.code.sliski.ui.fragment.PostDetailsFragment;
+import com.code.sliski.api.Client;
+import com.code.sliski.api.StackoverflowApi;
 import com.code.sliski.ui.fragment.PostDetailsFragmentTest;
 import com.code.sliski.ui.fragment.PostListFragmentTest;
-import com.code.sliski.ui.model.Post;
+import com.code.sliski.model.Post;
 import com.code.sliski.ui.preference.PrefManager;
 import com.google.gson.Gson;
 import com.tale.prettysharedpreferences.LongEditor;
@@ -49,8 +48,8 @@ public class TestAppModule {
 
     @Provides
     @Singleton
-    public StackoverflowClient provideStackoverflowClient(StackoverflowApi api, EventBus eventBus) {
-        return mock(StackoverflowClient.class);
+    public Client provideClient(StackoverflowApi api, EventBus eventBus) {
+        return mock(Client.class);
     }
 
     @Provides

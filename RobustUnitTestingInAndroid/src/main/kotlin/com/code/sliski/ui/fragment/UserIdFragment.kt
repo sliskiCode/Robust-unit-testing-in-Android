@@ -17,7 +17,7 @@ public class UserIdFragment : Fragment() {
     private var mUserIdEditText: EditText? = null
     private var mGoForUserButton: Button? = null
 
-    override public fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
+    override public fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.user_id_fragment, container, false)
     }
 
@@ -33,7 +33,7 @@ public class UserIdFragment : Fragment() {
     }
 
     private fun setListeners() {
-        mGoForUserButton!!.setOnClickListener(object : View.OnClickListener {
+        mGoForUserButton?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
                 try {
                     saveUserIdToPrefs()
@@ -47,7 +47,7 @@ public class UserIdFragment : Fragment() {
 
     private fun saveUserIdToPrefs() {
         val prefManager = PrefManager(getActivity().getSharedPreferences(getString(R.string.preferences), Context.MODE_PRIVATE))
-        val userId = mUserIdEditText!!.getText().toString().toLong()
+        val userId = mUserIdEditText?.getText().toString().toLong()
         prefManager
                 .userId()
                 .put(userId)

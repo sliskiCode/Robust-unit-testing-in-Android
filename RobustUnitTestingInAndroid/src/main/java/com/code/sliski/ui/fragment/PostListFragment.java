@@ -5,12 +5,12 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import com.code.sliski.ui.App;
+import com.code.sliski.api.Client;
+import com.code.sliski.event.GetPostsResponseEvent;
+import com.code.sliski.event.OnPostClickedEvent;
+import com.code.sliski.ui.BaseApplication;
 import com.code.sliski.ui.R;
-import com.code.sliski.ui.api.StackoverflowClient;
-import com.code.sliski.ui.event.GetPostsResponseEvent;
-import com.code.sliski.ui.event.OnPostClickedEvent;
-import com.code.sliski.ui.model.Post;
+import com.code.sliski.model.Post;
 import com.code.sliski.ui.preference.PrefManager;
 import de.greenrobot.event.EventBus;
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class PostListFragment extends ListFragment {
 
     @Inject
-    StackoverflowClient mClient;
+    Client mClient;
     @Inject
     EventBus mEventBus;
     @Inject
@@ -33,7 +33,7 @@ public class PostListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.inject(getActivity(), this);
+        BaseApplication.inject(getActivity(), this);
         mEventBus.register(this);
     }
 
@@ -57,7 +57,7 @@ public class PostListFragment extends ListFragment {
     }
 
     private void setAdapter() {
-        setListAdapter(new ArrayAdapter<Post>(getActivity(), android.R.layout.simple_list_item_1, mPosts));
+        setListAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mPosts));
     }
 
     private void setListeners() {
@@ -70,7 +70,7 @@ public class PostListFragment extends ListFragment {
                 } else {
                     getParentFragment().getChildFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.list_container, PostDetailsFragment.getInstance(post))
+                            .replace(R.id.list_container, PostDetailsFragment.Factory.getInstance(post))
                             .addToBackStack("details")
                             .commit();
                 }
@@ -92,7 +92,7 @@ public class PostListFragment extends ListFragment {
 
     @SuppressWarnings("unused")
     public void onEvent(GetPostsResponseEvent event) {
-        mPosts = new ArrayList<Post>(event.getPosts());
+        mPosts = new ArrayList<>(event.getPosts());
         setAdapter();
     }
 }

@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '0.10.195'
+    ext.kotlin_version = '0.11.91.1'
     repositories {
         jcenter()
     }
@@ -30,11 +30,6 @@ android {
         versionName "1.0"
     }
 
-    buildTypes {
-        release {
-        }
-    }
-
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -59,7 +54,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // Robolectric
-    testCompile 'junit:junit:4.11'
+    testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:2.4'
     testCompile 'org.mockito:mockito-all:1.9.5'
     testCompile 'com.googlecode.catch-exception:catch-exception:1.2.0'
