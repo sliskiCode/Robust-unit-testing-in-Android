@@ -9,8 +9,8 @@ import com.code.sliski.ui.R
 import android.widget.EditText
 import android.widget.Button
 import android.widget.Toast
-import com.code.sliski.ui.preference.PrefManager
 import android.content.Context
+import com.code.sliski.preference.PreferencesManager
 
 public class UserIdFragment : Fragment() {
 
@@ -46,12 +46,12 @@ public class UserIdFragment : Fragment() {
     }
 
     private fun saveUserIdToPrefs() {
-        val prefManager = PrefManager(getActivity().getSharedPreferences(getString(R.string.preferences), Context.MODE_PRIVATE))
+        val prefManager = PreferencesManager(getActivity().getSharedPreferences(getString(R.string.preferences), Context.MODE_PRIVATE))
         val userId = mUserIdEditText?.getText().toString().toLong()
         prefManager
                 .userId()
-                .put(userId)
-                .commit()
+                ?.put(userId)
+                ?.commit()
     }
 
     private fun replaceFragmentWithUserInfoFragment() {

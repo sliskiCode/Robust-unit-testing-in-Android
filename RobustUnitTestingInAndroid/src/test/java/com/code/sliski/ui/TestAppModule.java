@@ -3,10 +3,10 @@ package com.code.sliski.ui;
 import android.content.Context;
 import com.code.sliski.api.Client;
 import com.code.sliski.api.StackoverflowApi;
+import com.code.sliski.preference.PreferencesManager;
 import com.code.sliski.ui.fragment.PostDetailsFragmentTest;
 import com.code.sliski.ui.fragment.PostListFragmentTest;
 import com.code.sliski.model.Post;
-import com.code.sliski.ui.preference.PrefManager;
 import com.google.gson.Gson;
 import com.tale.prettysharedpreferences.LongEditor;
 import dagger.Module;
@@ -72,8 +72,8 @@ public class TestAppModule {
 
     @Provides
     @Singleton
-    public PrefManager providePrefManager() {
-        PrefManager prefManagerMock = mock(PrefManager.class);
+    public PreferencesManager providePrefManager() {
+        PreferencesManager prefManagerMock = mock(PreferencesManager.class);
         LongEditor longEditorMock = mock(LongEditor.class);
         when(longEditorMock.getOr(0l)).thenReturn(1408086l);
         when(prefManagerMock.userId()).thenReturn(longEditorMock);

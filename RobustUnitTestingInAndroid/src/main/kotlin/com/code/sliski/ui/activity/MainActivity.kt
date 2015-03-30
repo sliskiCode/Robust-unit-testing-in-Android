@@ -3,9 +3,9 @@ package com.code.sliski.ui.activity
 import android.support.v7.app.ActionBarActivity
 import android.os.Bundle
 import com.code.sliski.ui.R
-import com.code.sliski.ui.preference.PrefManager
 import android.content.Context
 import android.support.v4.app.Fragment
+import com.code.sliski.preference.PreferencesManager
 import com.code.sliski.ui.fragment.UserIdFragment
 import com.code.sliski.ui.fragment.UserInfoFragment
 
@@ -21,8 +21,8 @@ public class MainActivity : ActionBarActivity() {
     }
 
     private fun addFragment() {
-        val prefManager = PrefManager(getSharedPreferences(getString(R.string.preferences), Context.MODE_PRIVATE))
-        val userId = prefManager.userId().getOr(0L)
+        val prefManager = PreferencesManager(getSharedPreferences(getString(R.string.preferences), Context.MODE_PRIVATE))
+        val userId = prefManager.userId()?.getOr(0L)
         var fragment: Fragment
         if (userId == 0L) {
             fragment = UserIdFragment()

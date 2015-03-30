@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.widget.EditText;
+import com.code.sliski.preference.PreferencesManager;
 import com.code.sliski.ui.R;
 import com.code.sliski.ui.activity.MainActivity;
-import com.code.sliski.ui.preference.PrefManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,14 +24,14 @@ import static org.junit.Assert.assertTrue;
 public class UserIdFragmentTest {
 
     private UserIdFragment mUserIdFragment;
-    private PrefManager mPrefManager;
+    private PreferencesManager mPrefManager;
 
     @Before
     public void setUp() throws Exception {
         Context applicationContext = Robolectric.application.getApplicationContext();
         String prefsKey = applicationContext.getString(R.string.preferences);
         SharedPreferences sharedPreferences = applicationContext.getSharedPreferences(prefsKey, Context.MODE_PRIVATE);
-        mPrefManager = new PrefManager(sharedPreferences);
+        mPrefManager = new PreferencesManager(sharedPreferences);
         mUserIdFragment = new UserIdFragment();
         FragmentTestUtil.startFragment(mUserIdFragment, MainActivity.class);
     }

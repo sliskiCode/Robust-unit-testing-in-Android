@@ -4,10 +4,9 @@ import android.content.Context;
 import com.code.sliski.api.Client;
 import com.code.sliski.api.StackoverflowApi;
 import com.code.sliski.api.StackoverflowClient;
-import com.code.sliski.ui.fragment.PostDetailsFragment;
+import com.code.sliski.preference.PreferencesManager;
 import com.code.sliski.ui.fragment.PostListFragment;
 import com.code.sliski.model.Post;
-import com.code.sliski.ui.preference.PrefManager;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,7 +22,6 @@ import java.util.ArrayList;
 @Module(
         injects = {
                 PostListFragment.class,
-                PostDetailsFragment.class
         }
 )
 public class AppModule {
@@ -75,7 +73,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public PrefManager providePrefManager() {
-        return new PrefManager(mContext.getSharedPreferences(mContext.getString(R.string.preferences), Context.MODE_PRIVATE));
+    public PreferencesManager providePreferencesManager() {
+        return new PreferencesManager(mContext.getSharedPreferences(mContext.getString(R.string.preferences), Context.MODE_PRIVATE));
     }
 }

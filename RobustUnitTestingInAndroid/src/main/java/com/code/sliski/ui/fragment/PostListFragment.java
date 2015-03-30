@@ -8,10 +8,10 @@ import android.widget.ArrayAdapter;
 import com.code.sliski.api.Client;
 import com.code.sliski.event.GetPostsResponseEvent;
 import com.code.sliski.event.OnPostClickedEvent;
+import com.code.sliski.preference.PreferencesManager;
 import com.code.sliski.ui.BaseApplication;
 import com.code.sliski.ui.R;
 import com.code.sliski.model.Post;
-import com.code.sliski.ui.preference.PrefManager;
 import de.greenrobot.event.EventBus;
 
 import javax.inject.Inject;
@@ -24,7 +24,7 @@ public class PostListFragment extends ListFragment {
     @Inject
     EventBus mEventBus;
     @Inject
-    PrefManager mPrefManager;
+    PreferencesManager mPreferencesManager;
     @Inject
     ArrayList<Post> mPosts;
 
@@ -52,7 +52,7 @@ public class PostListFragment extends ListFragment {
     }
 
     private void getPosts() {
-        Long userId = mPrefManager.userId().getOr(0l);
+        Long userId = mPreferencesManager.userId().getOr(0l);
         mClient.getPosts(userId);
     }
 
