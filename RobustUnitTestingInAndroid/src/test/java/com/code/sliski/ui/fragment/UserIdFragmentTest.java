@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.widget.EditText;
 import com.code.sliski.preference.PreferencesManager;
-import com.code.sliski.ui.R;
+import com.code.sliski.R;
 import com.code.sliski.ui.activity.MainActivity;
 import org.junit.After;
 import org.junit.Before;
@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowHandler;
 import org.robolectric.shadows.ShadowToast;
 import org.robolectric.util.FragmentTestUtil;
@@ -20,6 +21,7 @@ import org.robolectric.util.FragmentTestUtil;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class UserIdFragmentTest {
 
@@ -77,6 +79,7 @@ public class UserIdFragmentTest {
         );
     }
 
+    @SuppressWarnings("ConstantConditions")
     @After
     public void tearDown() throws Exception {
         mPrefManager.userId().remove().commit();

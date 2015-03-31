@@ -9,8 +9,8 @@ import com.code.sliski.api.Client;
 import com.code.sliski.event.GetPostsResponseEvent;
 import com.code.sliski.event.OnPostClickedEvent;
 import com.code.sliski.preference.PreferencesManager;
-import com.code.sliski.ui.BaseApplication;
-import com.code.sliski.ui.R;
+import com.code.sliski.App;
+import com.code.sliski.R;
 import com.code.sliski.model.Post;
 import de.greenrobot.event.EventBus;
 
@@ -33,7 +33,7 @@ public class PostListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BaseApplication.inject(getActivity(), this);
+        App.inject(getActivity(), this);
         mEventBus.register(this);
     }
 

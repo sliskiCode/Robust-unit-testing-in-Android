@@ -1,6 +1,7 @@
 package com.code.sliski.ui;
 
 import android.content.Context;
+import com.code.sliski.AppModule;
 import com.code.sliski.api.Client;
 import com.code.sliski.api.StackoverflowApi;
 import com.code.sliski.preference.PreferencesManager;

@@ -1,15 +1,17 @@
 package com.code.sliski.ui.fragment;
 
 import android.widget.TextView;
-import com.code.sliski.ui.R;
+import com.code.sliski.R;
 import com.code.sliski.model.Post;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.FragmentTestUtil;
 
 import static org.junit.Assert.*;
 
+@Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class PostDetailsFragmentTest {
 

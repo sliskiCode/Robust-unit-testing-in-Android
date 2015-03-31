@@ -1,6 +1,8 @@
 package com.code.sliski.ui;
 
-public class TestBaseApplicationForDataLoaded extends BaseApplication {
+import com.code.sliski.App;
+
+public class TestBaseApplicationForDataLoaded extends App {
     @Override
     protected Object[] getModules() {
         return TestModulesForDataLoaded.get(this);

@@ -2,7 +2,7 @@ package com.code.sliski.ui.activity
 
 import android.support.v7.app.ActionBarActivity
 import android.os.Bundle
-import com.code.sliski.ui.R
+import com.code.sliski.R
 import android.content.Context
 import android.support.v4.app.Fragment
 import com.code.sliski.preference.PreferencesManager

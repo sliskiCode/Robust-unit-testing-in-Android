@@ -1,6 +1,6 @@
 package com.code.sliski.ui.fragment;
 
-import com.code.sliski.ui.R;
+import com.code.sliski.R;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +10,7 @@ import org.robolectric.util.FragmentTestUtil;
 
 import static org.junit.Assert.assertTrue;
 
+@Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class UserInfoFragmentTest {
 

@@ -3,7 +3,7 @@ package com.code.sliski.ui.activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import com.code.sliski.preference.PreferencesManager;
-import com.code.sliski.ui.R;
+import com.code.sliski.R;
 import com.code.sliski.ui.fragment.UserIdFragment;
 import com.code.sliski.ui.fragment.UserInfoFragment;
 import org.junit.Before;
@@ -11,9 +11,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertTrue;
 
+@Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class MainActivityTest {
 
@@ -25,6 +27,7 @@ public class MainActivityTest {
         mPreferencesManager = new PreferencesManager(mApplicationContext.getSharedPreferences(mApplicationContext.getString(R.string.preferences), Context.MODE_PRIVATE));
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void activityShouldAddUserIdFragment() throws Exception {
         mPreferencesManager.userId().remove().commit();
@@ -37,6 +40,7 @@ public class MainActivityTest {
         );
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void activityShouldAddUserInfoFragment() throws Exception {
         mPreferencesManager.userId().put(123l).commit();

@@ -1,4 +1,4 @@
-package com.code.sliski.ui;
+package com.code.sliski;
 
 import android.content.Context;
 

@@ -2,7 +2,7 @@ package com.code.sliski.ui.fragment;
 
 import com.code.sliski.api.Client;
 import com.code.sliski.event.OnPostClickedEvent;
-import com.code.sliski.ui.R;
+import com.code.sliski.R;
 import com.code.sliski.ui.TestBaseApplication;
 import com.code.sliski.ui.TestBaseApplicationForDataLoaded;
 import com.code.sliski.model.Post;
@@ -24,6 +24,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
+@Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class PostListFragmentTest {
 

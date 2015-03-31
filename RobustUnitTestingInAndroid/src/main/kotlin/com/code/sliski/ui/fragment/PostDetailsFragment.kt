@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.code.sliski.event.OnPostClickedEvent
 import com.code.sliski.model.Post
-import com.code.sliski.ui.BaseApplication
-import com.code.sliski.ui.R
+import com.code.sliski.App
+import com.code.sliski.R
 import de.greenrobot.event.EventBus
 import java.lang
 import javax.inject.Inject
