@@ -1,12 +1,9 @@
 package com.code.sliski.ui.fragment;
 
-import com.code.sliski.api.Client;
-import com.code.sliski.event.OnPostClickedEvent;
 import com.code.sliski.R;
-import com.code.sliski.ui.TestBaseApplication;
-import com.code.sliski.ui.TestBaseApplicationForDataLoaded;
-import com.code.sliski.model.Post;
-import de.greenrobot.event.EventBus;
+import com.code.sliski.TestApp;
+import com.code.sliski.TestAppDataLoaded;
+import com.code.sliski.event.OnPostClickedEvent;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,11 +13,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.FragmentTestUtil;
 
-import javax.inject.Inject;
 
-import java.util.ArrayList;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
@@ -30,39 +24,28 @@ public class PostListFragmentTest {
 
     private PostListFragment mPostListFragment;
 
-    @Inject
-    Client mClient;
-    @Inject
-    EventBus mEventBus;
-    @Inject
-    ArrayList<Post> mPosts;
-
     @Before
     public void setUp() throws Exception {
         mPostListFragment = new PostListFragment();
     }
 
     @Test
-    @Config(application = TestBaseApplication.class)
+    @Config(application = TestApp.class)
     public void postListFragmentShouldLoadDataFromApi() throws Exception {
-        TestBaseApplication.inject(Robolectric.application.getApplicationContext(), this);
         FragmentTestUtil.startFragment(mPostListFragment);
-        verify(mClient).getPosts(1408086l);
+        verify(mPostListFragment.getmClient()).getPosts(1408086l);
     }
 
     @Test
-    @Config(application = TestBaseApplicationForDataLoaded.class)
+    @Config(application = TestAppDataLoaded.class)
     public void postListFragmentShouldNotLoadDataFromApi() throws Exception {
-        TestBaseApplicationForDataLoaded.inject(Robolectric.application.getApplicationContext(), this);
         FragmentTestUtil.startFragment(mPostListFragment);
-        verify(mClient, never()).getPosts(1408086l);
+        verify(mPostListFragment.getmClient(), never()).getPosts(1408086l);
     }
 
     @Test
-    @Config(application = TestBaseApplicationForDataLoaded.class, qualifiers = "layout")
+    @Config(application = TestAppDataLoaded.class, qualifiers = "layout")
     public void onItemClickOnListShouldReplaceFragmentWithPostDetailsFragment() throws Exception {
-        TestBaseApplicationForDataLoaded.inject(Robolectric.application.getApplicationContext(), this);
-
         UserInfoFragment userInfoFragment = new UserInfoFragment();
         FragmentTestUtil.startFragment(userInfoFragment);
         mPostListFragment = (PostListFragment) userInfoFragment.getChildFragmentManager().findFragmentById(R.id.list_container);
@@ -75,16 +58,14 @@ public class PostListFragmentTest {
     }
 
     @Test
-    @Config(application = TestBaseApplicationForDataLoaded.class, qualifiers = "layout-large")
+    @Config(application = TestAppDataLoaded.class, qualifiers = "layout-large")
     public void onItemClickOnListShouldSendOnPostClickedEventToPostDetailsFragment() throws Exception {
-        TestBaseApplicationForDataLoaded.inject(Robolectric.application.getApplicationContext(), this);
-
         UserInfoFragment userInfoFragment = new UserInfoFragment();
         FragmentTestUtil.startFragment(userInfoFragment);
         mPostListFragment = (PostListFragment) userInfoFragment.getChildFragmentManager().findFragmentById(R.id.list_container);
 
         Robolectric.shadowOf(mPostListFragment.getListView()).performItemClick(1);
 
-        verify(mEventBus).post(Mockito.any(OnPostClickedEvent.class));
+        verify(mPostListFragment.getmEventBus()).post(Mockito.any(OnPostClickedEvent.class));
     }
 }

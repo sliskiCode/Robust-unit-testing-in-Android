@@ -1,12 +1,9 @@
-package com.code.sliski.ui;
+package com.code.sliski;
 
-import android.content.Context;
-import com.code.sliski.AppModule;
+import android.support.annotation.Nullable;
 import com.code.sliski.api.Client;
 import com.code.sliski.api.StackoverflowApi;
 import com.code.sliski.preference.PreferencesManager;
-import com.code.sliski.ui.fragment.PostDetailsFragmentTest;
-import com.code.sliski.ui.fragment.PostListFragmentTest;
 import com.code.sliski.model.Post;
 import com.google.gson.Gson;
 import com.tale.prettysharedpreferences.LongEditor;
@@ -15,41 +12,19 @@ import dagger.Provides;
 import de.greenrobot.event.EventBus;
 
 import javax.inject.Singleton;
+
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@Module(
-        includes = {
-                AppModule.class
-        },
-        injects = {
-                PostListFragmentTest.class,
-                PostDetailsFragmentTest.class
-        },
-        overrides = true
-)
-public class TestAppModuleForDataLoaded {
-
-    private Context mContext;
-
-    public TestAppModuleForDataLoaded(Context context) {
-        mContext = context;
-    }
-
-    public TestAppModuleForDataLoaded() {
-    }
+@Module
+public class TestAppModule {
 
     @Provides
+    @Nullable
     public ArrayList<Post> providePosts() {
-        ArrayList<Post> posts = new ArrayList<Post>();
-        posts.add(new Post(1, 1 , "www.1.com"));
-        posts.add(new Post(2, 2 , "www.2.com"));
-        posts.add(new Post(3, 3 , "www.3.com"));
-        posts.add(new Post(4, 4 , "www.4.com"));
-        posts.add(new Post(5, 5 , "www.5.com"));
-        return posts;
+        return null;
     }
 
     @Provides
@@ -60,12 +35,13 @@ public class TestAppModuleForDataLoaded {
 
     @Provides
     @Singleton
-    public StackoverflowApi provideStackoverflowApi(Gson gson) {
+    public StackoverflowApi provideStackoverflowApi(@Nullable Gson gson) {
         return mock(StackoverflowApi.class);
     }
 
     @Provides
     @Singleton
+    @Nullable
     public Gson provideGson() {
         return null;
     }

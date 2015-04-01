@@ -1,11 +1,11 @@
 package com.code.sliski;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import com.code.sliski.api.Client;
 import com.code.sliski.api.StackoverflowApi;
 import com.code.sliski.api.StackoverflowClient;
 import com.code.sliski.preference.PreferencesManager;
-import com.code.sliski.ui.fragment.PostListFragment;
 import com.code.sliski.model.Post;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -19,11 +19,7 @@ import retrofit.converter.GsonConverter;
 import javax.inject.Singleton;
 import java.util.ArrayList;
 
-@Module(
-        injects = {
-                PostListFragment.class,
-        }
-)
+@Module
 public class AppModule {
 
     private Context mContext;
@@ -36,6 +32,7 @@ public class AppModule {
     }
 
     @Provides
+    @Nullable
     public ArrayList<Post> providePosts() {
         return null;
     }
