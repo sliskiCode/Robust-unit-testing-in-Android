@@ -21,6 +21,7 @@ import org.robolectric.util.FragmentTestUtil;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings("ConstantConditions")
 @Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class UserIdFragmentTest {
@@ -38,7 +39,11 @@ public class UserIdFragmentTest {
         FragmentTestUtil.startFragment(mUserIdFragment, MainActivity.class);
     }
 
-    @SuppressWarnings("ConstantConditions")
+    @After
+    public void tearDown() throws Exception {
+        mPrefManager.userId().remove().commit();
+    }
+
     @Test
     public void onClickGoButtonShouldSaveIdFromUserIdEditTextToPreferences() throws Exception {
         long id = 1l;
@@ -52,7 +57,6 @@ public class UserIdFragmentTest {
         );
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Test
     public void onClickGoButtonShouldShowToastWithBadIdFormat() throws Exception {
         String id = "foo";
@@ -66,7 +70,6 @@ public class UserIdFragmentTest {
         );
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Test
     public void onClickGoButtonShouldReplaceFragmentWithUserInfoFragment() throws Exception {
         long id = 2l;
@@ -77,11 +80,5 @@ public class UserIdFragmentTest {
                 "Fragment should be instance of UserInfoFragment, but it is not.",
                 fragment instanceof UserInfoFragment
         );
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    @After
-    public void tearDown() throws Exception {
-        mPrefManager.userId().remove().commit();
     }
 }

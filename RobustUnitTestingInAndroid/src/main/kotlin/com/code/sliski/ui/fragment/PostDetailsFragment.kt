@@ -23,6 +23,9 @@ public class PostDetailsFragment : Fragment() {
     private var mScoreTextView: TextView? = null
     private var mLinkTextView: TextView? = null
 
+    var mEventBus: EventBus? = null
+        [Inject] set
+
     companion object Factory {
         fun getInstance(post: Post): PostDetailsFragment {
             val postDetailsFragment = PostDetailsFragment()
@@ -33,7 +36,8 @@ public class PostDetailsFragment : Fragment() {
 
     override public fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        EventBus.getDefault().register(this)
+        App.mGraph.inject(this)
+        mEventBus?.register(this)
     }
 
     override public fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -60,7 +64,7 @@ public class PostDetailsFragment : Fragment() {
 
     override public fun onDestroy() {
         super.onDestroy()
-        EventBus.getDefault().unregister(this)
+        mEventBus?.unregister(this)
     }
 
     override public fun onSaveInstanceState(outState: Bundle) {

@@ -15,6 +15,7 @@ import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings("ConstantConditions")
 @Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class MainActivityTest {
@@ -27,7 +28,6 @@ public class MainActivityTest {
         mPreferencesManager = new PreferencesManager(mApplicationContext.getSharedPreferences(mApplicationContext.getString(R.string.preferences), Context.MODE_PRIVATE));
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Test
     public void activityShouldAddUserIdFragment() throws Exception {
         mPreferencesManager.userId().remove().commit();
@@ -40,7 +40,6 @@ public class MainActivityTest {
         );
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Test
     public void activityShouldAddUserInfoFragment() throws Exception {
         mPreferencesManager.userId().put(123l).commit();

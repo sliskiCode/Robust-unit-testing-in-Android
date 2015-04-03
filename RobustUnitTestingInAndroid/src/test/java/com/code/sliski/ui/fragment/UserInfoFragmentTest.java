@@ -10,6 +10,7 @@ import org.robolectric.util.FragmentTestUtil;
 
 import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings("ConstantConditions")
 @Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class UserInfoFragmentTest {
@@ -21,7 +22,6 @@ public class UserInfoFragmentTest {
         mUserInfoFragment = new UserInfoFragment();
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Test
     public void fragmentShouldContainsPhoneLayout() throws Exception {
         FragmentTestUtil.startFragment(mUserInfoFragment);
@@ -31,7 +31,6 @@ public class UserInfoFragmentTest {
         );
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Test
     @Config(qualifiers = "layout-large")
     public void fragmentShouldContainsTwoPaneLayout() throws Exception {

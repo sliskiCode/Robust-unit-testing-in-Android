@@ -22,13 +22,11 @@ import java.util.ArrayList;
 @Module
 public class AppModule {
 
-    private Context mContext;
+    private App mApplicationContext;
+    public static final String S_ENDPOINT = "https://api.stackexchange.com/2.2";
 
-    public AppModule(Context context) {
-        mContext = context;
-    }
-
-    public AppModule() {
+    public AppModule(App applicationContext) {
+        mApplicationContext = applicationContext;
     }
 
     @Provides
@@ -47,9 +45,8 @@ public class AppModule {
     @Singleton
     public StackoverflowApi provideStackoverflowApi(Gson gson) {
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("https://api.stackexchange.com/2.2")
+                .setEndpoint(S_ENDPOINT)
                 .setConverter(new GsonConverter(gson))
-                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         return restAdapter.create(StackoverflowApi.class);
     }
@@ -71,6 +68,6 @@ public class AppModule {
     @Provides
     @Singleton
     public PreferencesManager providePreferencesManager() {
-        return new PreferencesManager(mContext.getSharedPreferences(mContext.getString(R.string.preferences), Context.MODE_PRIVATE));
+        return new PreferencesManager(mApplicationContext.getSharedPreferences(mApplicationContext.getString(R.string.preferences), Context.MODE_PRIVATE));
     }
 }

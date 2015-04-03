@@ -6,5 +6,5 @@ import javax.inject.Singleton;
 
 @Singleton
 @Component(modules = TestAppModuleDataLoaded.class)
-public interface TestAppComponentDataLoaded extends com.code.sliski.Component{
+public interface TestAppComponentDataLoaded extends com.code.sliski.Component {
 }

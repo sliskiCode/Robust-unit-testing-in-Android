@@ -11,14 +11,14 @@ import org.robolectric.util.FragmentTestUtil;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings("ConstantConditions")
 @Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class PostDetailsFragmentTest {
 
-    @SuppressWarnings("ConstantConditions")
     @Test
     public void viewsShouldDisplayInfoAboutPost() throws Exception {
-        PostDetailsFragment postDetailsFragment = PostDetailsFragment.Factory.getInstance(new Post(1, 100, "www.stack.com/baaah"));
+        PostDetailsFragment postDetailsFragment = PostDetailsFragment.Factory.getInstance(new Post(1, 100, "www.stack.com/aa"));
         FragmentTestUtil.startFragment(postDetailsFragment);
         TextView score = ((TextView) postDetailsFragment.getView().findViewById(R.id.score));
         TextView link = ((TextView) postDetailsFragment.getView().findViewById(R.id.link));
@@ -27,12 +27,11 @@ public class PostDetailsFragmentTest {
                 score.getText().toString()
         );
         assertEquals(
-                "www.stack.com/baaah",
+                "www.stack.com/aa",
                 link.getText().toString()
         );
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Test
     public void viewsShouldNotDisplayInfoAboutPost() throws Exception {
         PostDetailsFragment postDetailsFragment = new PostDetailsFragment();
