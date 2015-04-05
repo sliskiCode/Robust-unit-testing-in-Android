@@ -5,15 +5,21 @@ import android.os.Bundle
 import com.code.sliski.R
 import android.content.Context
 import android.support.v4.app.Fragment
+import com.code.sliski.App
 import com.code.sliski.preference.PreferencesManager
 import com.code.sliski.ui.fragment.UserIdFragment
 import com.code.sliski.ui.fragment.UserInfoFragment
+import javax.inject.Inject
 
 public class MainActivity : ActionBarActivity() {
 
-    override protected fun onCreate(savedInstanceState: Bundle?) {
+    public var mPreferencesManager: PreferencesManager? = null
+        [Inject] set
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        App.mGraph.inject(this)
 
         if (savedInstanceState == null) {
             addFragment()
@@ -21,8 +27,7 @@ public class MainActivity : ActionBarActivity() {
     }
 
     private fun addFragment() {
-        val prefManager = PreferencesManager(getSharedPreferences(getString(R.string.preferences), Context.MODE_PRIVATE))
-        val userId = prefManager.userId()?.getOr(0L)
+        val userId = mPreferencesManager?.userId()?.getOr(0L)
         var fragment: Fragment
         if (userId == 0L) {
             fragment = UserIdFragment()
@@ -35,7 +40,7 @@ public class MainActivity : ActionBarActivity() {
                 .commit()
     }
 
-    override public fun onBackPressed() {
+    override fun onBackPressed() {
         val fm = getSupportFragmentManager()
         fm.getFragments().forEach {
             if (it.isVisible()) {
