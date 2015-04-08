@@ -13,7 +13,7 @@ public class App extends Application {
     }
 
     protected Component getGraph() {
-        return Dagger_AppComponent.builder()
+        return DaggerAppComponent.builder()
                 .appModule(new AppModule(this)).build();
     }
 }
