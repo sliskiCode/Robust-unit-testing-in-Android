@@ -19,7 +19,7 @@ import retrofit.converter.GsonConverter;
 import javax.inject.Singleton;
 import java.util.ArrayList;
 
-@Module
+@Module()
 public class AppModule {
 
     private App mApplicationContext;
