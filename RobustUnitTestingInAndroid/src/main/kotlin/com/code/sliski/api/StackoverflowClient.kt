@@ -8,6 +8,7 @@ import com.code.sliski.model.PostWrapper
 import com.code.sliski.model.Post
 import retrofit.RetrofitError
 import retrofit.client.Response
+import java.util.ArrayList
 
 public class StackoverflowClient(private var mApi: StackoverflowApi, private var mEventBus: EventBus) : Client {
     override fun getPosts(userId: Long) {
@@ -16,7 +17,7 @@ public class StackoverflowClient(private var mApi: StackoverflowApi, private var
             }
 
             override fun success(postsWrapper: model.PostWrapper<Post>, response: Response) {
-                mEventBus.post(GetPostsResponseEvent(postsWrapper.mPosts));
+                mEventBus.post(GetPostsResponseEvent(ArrayList(postsWrapper.mPosts)));
             }
         })
     }

@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import com.code.sliski.App;
 import com.code.sliski.R;
 import com.code.sliski.TestApp;
-import com.code.sliski.ui.fragment.UserIdFragment;
+import com.code.sliski.ui.fragment.LoginFragment;
 import com.code.sliski.ui.fragment.UserInfoFragment;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(RobolectricTestRunner.class)
 public class MainActivityTest {
 
-    Fragment mAddedFragment;
+    Fragment fragment;
 
     @Before
     public void setUp() throws Exception {
@@ -29,7 +29,7 @@ public class MainActivityTest {
                 .start()
                 .visible()
                 .get();
-        mAddedFragment = mainActivity
+        fragment = mainActivity
                 .getSupportFragmentManager()
                 .findFragmentById(R.id.container);
     }
@@ -37,18 +37,12 @@ public class MainActivityTest {
     @Test
     @Config(application = App.class)
     public void addFragment_ShouldAddUserIdFragment() throws Exception {
-        assertTrue(
-                "added fragment should be instance of UserIdFragment",
-                mAddedFragment instanceof UserIdFragment
-        );
+        assertTrue(fragment instanceof LoginFragment);
     }
 
     @Test
     @Config(application = TestApp.class)
     public void addFragment_ShouldAddUserInfoFragment() throws Exception {
-        assertTrue(
-                "added fragment should be instance of UserInfoFragment",
-                mAddedFragment instanceof UserInfoFragment
-        );
+        assertTrue(fragment instanceof UserInfoFragment);
     }
 }

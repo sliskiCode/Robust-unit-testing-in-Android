@@ -5,6 +5,7 @@ import com.code.sliski.api.Client;
 import com.code.sliski.api.StackoverflowApi;
 import com.code.sliski.preference.PreferencesManager;
 import com.code.sliski.model.Post;
+import com.code.sliski.ui.presenter.*;
 import com.google.gson.Gson;
 import com.tale.prettysharedpreferences.LongEditor;
 import dagger.Module;
@@ -50,6 +51,39 @@ public class TestAppModule {
     @Singleton
     public EventBus provideEventBus() {
         return mock(EventBus.class);
+    }
+
+    @Provides
+    @Singleton
+    public LoginFragmentPresenter provideLoginFragmentPresenter(PreferencesManager preferencesManager) {
+        LoginFragmentPresenterImpl loginFragmentPresenter = new LoginFragmentPresenterImpl();
+        loginFragmentPresenter.setPreferencesManager(preferencesManager);
+        return loginFragmentPresenter;
+    }
+
+    @Provides
+    @Singleton
+    public MainActivityPresenter provideMainActivityPresenter(PreferencesManager preferencesManager) {
+        MainActivityPresenterImpl mainActivityPresenter = new MainActivityPresenterImpl();
+        mainActivityPresenter.setPreferencesManager(preferencesManager);
+        return mainActivityPresenter;
+    }
+
+    @Provides
+    @Singleton
+    public UserInfoFragmentPresenter provideUserInfoFragmentPresenter() {
+        return new UserInfoFragmentPresenterImpl();
+    }
+
+    @Provides
+    @Singleton
+    public PostListFragmentPresenter providePostListFragmentPresenter(Client client, PreferencesManager preferencesManager, @Nullable ArrayList<Post> posts, EventBus eventBus) {
+        PostListFragmentPresenterImpl postListFragmentPresenter = new PostListFragmentPresenterImpl();
+        postListFragmentPresenter.setClient(client);
+        postListFragmentPresenter.setPreferencesManager(preferencesManager);
+        postListFragmentPresenter.setPostList(posts);
+        postListFragmentPresenter.setEventBus(eventBus);
+        return postListFragmentPresenter;
     }
 
     @Provides

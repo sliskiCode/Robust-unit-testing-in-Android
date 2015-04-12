@@ -1,6 +1,5 @@
 package com.code.sliski.ui.fragment;
 
-import com.code.sliski.R;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,36 +7,33 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.FragmentTestUtil;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("ConstantConditions")
 @Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class UserInfoFragmentTest {
 
-    private UserInfoFragment mUserInfoFragment;
+    private int childFragmentCount;
 
     @Before
     public void setUp() throws Exception {
-        mUserInfoFragment = new UserInfoFragment();
+        UserInfoFragment userInfoFragment = new UserInfoFragment();
+        FragmentTestUtil.startFragment(userInfoFragment);
+        childFragmentCount = userInfoFragment
+                .getChildFragmentManager()
+                .getFragments()
+                .size();
     }
 
     @Test
-    public void fragmentShouldContainsPhoneLayout() throws Exception {
-        FragmentTestUtil.startFragment(mUserInfoFragment);
-        assertTrue(
-                "Fragment should contains one pane layout for phone, but it does not!",
-                mUserInfoFragment.getView().findViewById(R.id.preview_container) == null
-        );
+    public void fragment_ShouldContainsOneChild() throws Exception {
+        assertEquals(1, childFragmentCount);
     }
 
     @Test
     @Config(qualifiers = "layout-large")
-    public void fragmentShouldContainsTwoPaneLayout() throws Exception {
-        FragmentTestUtil.startFragment(mUserInfoFragment);
-        assertTrue(
-                "Fragment should contains two pane layout for tablet, but it does not!",
-                mUserInfoFragment.getView().findViewById(R.id.preview_container) != null
-        );
+    public void fragment_ShouldContainsTwoChildren() throws Exception {
+        assertEquals(2, childFragmentCount);
     }
 }

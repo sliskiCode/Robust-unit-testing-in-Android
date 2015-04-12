@@ -7,36 +7,36 @@ import android.content.Context
 import android.support.v4.app.Fragment
 import com.code.sliski.App
 import com.code.sliski.preference.PreferencesManager
-import com.code.sliski.ui.fragment.UserIdFragment
+import com.code.sliski.ui.fragment.LoginFragment
 import com.code.sliski.ui.fragment.UserInfoFragment
+import com.code.sliski.ui.presenter.MainActivityPresenter
+import com.code.sliski.ui.presenter.MainActivityPresenterImpl
 import javax.inject.Inject
 
-public class MainActivity : ActionBarActivity() {
+public class MainActivity : ActionBarActivity(), MainActivityView {
 
-    public var mPreferencesManager: PreferencesManager? = null
+    public var presenter: MainActivityPresenter? = null
         [Inject] set
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super<ActionBarActivity>.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         App.mGraph.inject(this)
-
-        if (savedInstanceState == null) {
-            addFragment()
-        }
+        (presenter as MainActivityPresenterImpl).mainActivityView = this
+        presenter!!.addFragment(savedInstanceState)
     }
 
-    private fun addFragment() {
-        val userId = mPreferencesManager?.userId()?.getOr(0L)
-        var fragment: Fragment
-        if (userId == 0L) {
-            fragment = UserIdFragment()
-        } else {
-            fragment = UserInfoFragment()
-        }
+    override fun addLoginFragment() {
         getSupportFragmentManager().
                 beginTransaction().
-                add(R.id.container, fragment)
+                add(R.id.container, LoginFragment())
+                .commit()
+    }
+
+    override fun addUserInfoFragment() {
+        getSupportFragmentManager().
+                beginTransaction().
+                add(R.id.container, UserInfoFragment())
                 .commit()
     }
 
@@ -51,6 +51,6 @@ public class MainActivity : ActionBarActivity() {
                 }
             }
         }
-        super.onBackPressed()
+        super<ActionBarActivity>.onBackPressed()
     }
 }

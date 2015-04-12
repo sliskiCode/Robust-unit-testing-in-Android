@@ -10,6 +10,7 @@ import com.code.sliski.event.OnPostClickedEvent
 import com.code.sliski.model.Post
 import com.code.sliski.App
 import com.code.sliski.R
+import com.code.sliski.util.findView
 import de.greenrobot.event.EventBus
 import java.lang
 import javax.inject.Inject
@@ -19,9 +20,6 @@ public class PostDetailsFragment : Fragment() {
     public val POST: String = "POST"
 
     var mPost: Post? = null
-
-    private var mScoreTextView: TextView? = null
-    private var mLinkTextView: TextView? = null
 
     var mEventBus: EventBus? = null
         [Inject] set
@@ -35,20 +33,17 @@ public class PostDetailsFragment : Fragment() {
     }
 
     override public fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super<Fragment>.onCreate(savedInstanceState)
         App.mGraph.inject(this)
         mEventBus?.register(this)
     }
 
     override public fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val view = inflater.inflate(R.layout.details_fragment, container, false)
-        mScoreTextView = view.findViewById(R.id.score) as TextView
-        mLinkTextView = view.findViewById(R.id.link) as TextView
-        return view
+        return inflater.inflate(R.layout.details_fragment, container, false)
     }
 
     override public fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        super<Fragment>.onActivityCreated(savedInstanceState)
         if (savedInstanceState != null) {
             mPost = savedInstanceState.getParcelable(POST)
         }
@@ -58,17 +53,17 @@ public class PostDetailsFragment : Fragment() {
     }
 
     private fun setViews() {
-        mScoreTextView?.setText(lang.String.valueOf(mPost?.score))
-        mLinkTextView?.setText(mPost?.link)
+        findView<TextView>(R.id.score).setText(lang.String.valueOf(mPost?.score))
+        findView<TextView>(R.id.link).setText(mPost?.link)
     }
 
     override public fun onDestroy() {
-        super.onDestroy()
+        super<Fragment>.onDestroy()
         mEventBus?.unregister(this)
     }
 
     override public fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
+        super<Fragment>.onSaveInstanceState(outState)
         outState.putParcelable(POST, mPost)
     }
 

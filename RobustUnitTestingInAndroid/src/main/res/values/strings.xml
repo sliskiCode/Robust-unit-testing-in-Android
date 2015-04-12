@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Stackoverflow</string>
     <string name="preferences">MyPrefs</string>
+    <string name="bad_format_info">Bad id format</string>
 </resources>
