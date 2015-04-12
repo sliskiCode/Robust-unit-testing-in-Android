@@ -19,31 +19,31 @@ import static org.mockito.Mockito.verify;
 @RunWith(RobolectricTestRunner.class)
 public class LoginFragmentPresenterImplTest {
 
-    private LoginFragmentPresenterImpl loginFragmentPresenter;
+    private LoginFragmentPresenterImpl presenter;
 
     @Before
     public void setUp() throws Exception {
-        loginFragmentPresenter = new LoginFragmentPresenterImpl();
-        loginFragmentPresenter.setLoginFragmentView(mock(LoginFragmentView.class));
-        loginFragmentPresenter.setPreferencesManager(getPreferencesManager());
+        presenter = new LoginFragmentPresenterImpl();
+        presenter.setLoginFragmentView(mock(LoginFragmentView.class));
+        presenter.setPreferencesManager(getPreferencesManager());
     }
 
     @Test
     public void login_ShouldShowBadFormatInfo() throws Exception {
-        loginFragmentPresenter.login("");
-        verify(loginFragmentPresenter.getLoginFragmentView()).showBadFormatInfo();
+        presenter.login("");
+        verify(presenter.getLoginFragmentView()).showBadFormatInfo();
     }
 
     @Test
     public void login_ShouldReplaceFragmentAndSaveIdToPrefs() throws Exception {
-        loginFragmentPresenter.login("1408086");
+        presenter.login("1408086");
         verify(
-                loginFragmentPresenter.getLoginFragmentView()
+                presenter.getLoginFragmentView()
         ).replaceWithUserInfoFragment();
 
         assertEquals(
                 Long.valueOf(1408086L),
-                loginFragmentPresenter.getPreferencesManager().userId().getOr(0l)
+                presenter.getPreferencesManager().userId().getOr(0l)
         );
     }
 

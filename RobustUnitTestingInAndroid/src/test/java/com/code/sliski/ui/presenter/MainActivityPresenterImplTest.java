@@ -20,36 +20,36 @@ import static org.mockito.Mockito.verify;
 @RunWith(RobolectricTestRunner.class)
 public class MainActivityPresenterImplTest {
 
-    private MainActivityPresenterImpl mainActivityPresenter;
+    private MainActivityPresenterImpl presenter;
 
     @Before
     public void setUp() throws Exception {
-        mainActivityPresenter = new MainActivityPresenterImpl();
-        mainActivityPresenter.setMainActivityView(mock(MainActivityView.class));
-        mainActivityPresenter.setPreferencesManager(getPreferencesManager());
+        presenter = new MainActivityPresenterImpl();
+        presenter.setMainActivityView(mock(MainActivityView.class));
+        presenter.setPreferencesManager(getPreferencesManager());
     }
 
     @Test
     public void addFragment_ShouldNotAddFragment() throws Exception {
-        mainActivityPresenter.addFragment(mock(Bundle.class));
+        presenter.addFragment(mock(Bundle.class));
         MainActivityView mainActivityView =
-                mainActivityPresenter.getMainActivityView();
+                presenter.getMainActivityView();
         verify(mainActivityView, never()).addLoginFragment();
         verify(mainActivityView, never()).addUserInfoFragment();
     }
 
     @Test
     public void addFragment_ShouldAddLoginFragment() throws Exception {
-        mainActivityPresenter.getPreferencesManager().userId().put(0L).commit();
-        mainActivityPresenter.addFragment(null);
-        verify(mainActivityPresenter.getMainActivityView()).addLoginFragment();
+        presenter.getPreferencesManager().userId().put(0L).commit();
+        presenter.addFragment(null);
+        verify(presenter.getMainActivityView()).addLoginFragment();
     }
 
     @Test
     public void addFragment_ShouldAddUserInfoFragment() throws Exception {
-        mainActivityPresenter.getPreferencesManager().userId().put(1408086L).commit();
-        mainActivityPresenter.addFragment(null);
-        verify(mainActivityPresenter.getMainActivityView()).addUserInfoFragment();
+        presenter.getPreferencesManager().userId().put(1408086L).commit();
+        presenter.addFragment(null);
+        verify(presenter.getMainActivityView()).addUserInfoFragment();
     }
 
     @NotNull

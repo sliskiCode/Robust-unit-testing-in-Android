@@ -20,40 +20,40 @@ import static org.mockito.Mockito.when;
 
 public class PostListFragmentPresenterImplTest {
 
-    private PostListFragmentPresenterImpl postListFragmentPresenter;
+    private PostListFragmentPresenterImpl presenter;
 
     @Before
     public void setUp() throws Exception {
-        postListFragmentPresenter = new PostListFragmentPresenterImpl();
-        postListFragmentPresenter.setPostListFragmentView(mock(PostListFragmentView.class));
-        postListFragmentPresenter.setClient(mock(Client.class));
-        postListFragmentPresenter.setEventBus(mock(EventBus.class));
+        presenter = new PostListFragmentPresenterImpl();
+        presenter.setPostListFragmentView(mock(PostListFragmentView.class));
+        presenter.setClient(mock(Client.class));
+        presenter.setEventBus(mock(EventBus.class));
     }
 
     @Test
     public void getPosts_ShouldLoadPostsFromCache() throws Exception {
         ArrayList<Post> arrayList = new ArrayList<>();
-        postListFragmentPresenter.setPostList(arrayList);
-        postListFragmentPresenter.getPosts();
-        verify(postListFragmentPresenter.getPostListFragmentView()).setAdapter(arrayList);
+        presenter.setPostList(arrayList);
+        presenter.getPosts();
+        verify(presenter.getPostListFragmentView()).setAdapter(arrayList);
     }
 
     @Test
     public void getPosts_ShouldLoadPostFromServer() throws Exception {
         PreferencesManager preferencesManager = getPreferencesManager(1408086L);
-        postListFragmentPresenter.setPreferencesManager(preferencesManager);
-        postListFragmentPresenter.setPostList(null);
-        postListFragmentPresenter.getPosts();
-        verify(postListFragmentPresenter.getClient()).getPosts(1408086L);
+        presenter.setPreferencesManager(preferencesManager);
+        presenter.setPostList(null);
+        presenter.getPosts();
+        verify(presenter.getClient()).getPosts(1408086L);
     }
 
     @Test
     public void onItemClick_ShouldPostOnPostClickedEvent() throws Exception {
         ArrayList<Post> posts = new ArrayList<>();
         posts.add(new Post(1, 0, ""));
-        postListFragmentPresenter.setPostList(posts);
-        postListFragmentPresenter.onItemClick(0, true);
-        verify(postListFragmentPresenter.getEventBus()).post(Mockito.any(OnPostClickedEvent.class));
+        presenter.setPostList(posts);
+        presenter.onItemClick(0, true);
+        verify(presenter.getEventBus()).post(Mockito.any(OnPostClickedEvent.class));
     }
 
     @Test
@@ -61,9 +61,9 @@ public class PostListFragmentPresenterImplTest {
         ArrayList<Post> posts = new ArrayList<>();
         Post post = new Post(1, 0, "");
         posts.add(post);
-        postListFragmentPresenter.setPostList(posts);
-        postListFragmentPresenter.onItemClick(0, false);
-        verify(postListFragmentPresenter.getPostListFragmentView()).addToBackStack(post);
+        presenter.setPostList(posts);
+        presenter.onItemClick(0, false);
+        verify(presenter.getPostListFragmentView()).addToBackStack(post);
     }
 
     @NotNull
