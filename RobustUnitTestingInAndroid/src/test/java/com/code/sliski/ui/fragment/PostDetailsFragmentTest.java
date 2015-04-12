@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class PostDetailsFragmentTest {
 
     @Test
-    public void viewsShouldDisplayInfoAboutPost() throws Exception {
+    public void fragment_ShouldDisplayInfoAboutPost() throws Exception {
         PostDetailsFragment postDetailsFragment = PostDetailsFragment.Factory.getInstance(new Post(1, 100, "www.stack.com/aa"));
         FragmentTestUtil.startFragment(postDetailsFragment);
         TextView score = ((TextView) postDetailsFragment.getView().findViewById(R.id.score));
@@ -33,7 +33,7 @@ public class PostDetailsFragmentTest {
     }
 
     @Test
-    public void viewsShouldNotDisplayInfoAboutPost() throws Exception {
+    public void fragment_ShouldNotDisplayInfoAboutPost() throws Exception {
         PostDetailsFragment postDetailsFragment = new PostDetailsFragment();
         FragmentTestUtil.startFragment(postDetailsFragment);
         TextView score = ((TextView) postDetailsFragment.getView().findViewById(R.id.score));
