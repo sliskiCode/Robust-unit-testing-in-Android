@@ -21,9 +21,7 @@ import com.code.sliski.ui.presenter.PostListFragmentPresenterImpl
 import com.code.sliski.util.addToBackStack
 import com.code.sliski.util.isTablet
 
-public class PostListFragment :
-        ListFragment(),
-        PostListFragmentView,
+public class PostListFragment : ListFragment(), PostListFragmentView,
         AdapterView.OnItemClickListener {
 
     public var presenter: PostListFragmentPresenter? = null

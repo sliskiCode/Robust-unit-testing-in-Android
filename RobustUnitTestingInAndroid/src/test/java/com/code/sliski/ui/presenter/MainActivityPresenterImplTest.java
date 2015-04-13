@@ -32,8 +32,7 @@ public class MainActivityPresenterImplTest {
     @Test
     public void addFragment_ShouldNotAddFragment() throws Exception {
         presenter.addFragment(mock(Bundle.class));
-        MainActivityView mainActivityView =
-                presenter.getView();
+        MainActivityView mainActivityView = presenter.getView();
         verify(mainActivityView, never()).addLoginFragment();
         verify(mainActivityView, never()).addUserInfoFragment();
     }
