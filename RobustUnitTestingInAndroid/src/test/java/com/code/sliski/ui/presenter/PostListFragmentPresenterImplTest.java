@@ -25,7 +25,7 @@ public class PostListFragmentPresenterImplTest {
     @Before
     public void setUp() throws Exception {
         presenter = new PostListFragmentPresenterImpl();
-        presenter.setPostListFragmentView(mock(PostListFragmentView.class));
+        presenter.setView(mock(PostListFragmentView.class));
         presenter.setClient(mock(Client.class));
         presenter.setEventBus(mock(EventBus.class));
     }
@@ -35,7 +35,7 @@ public class PostListFragmentPresenterImplTest {
         ArrayList<Post> arrayList = new ArrayList<>();
         presenter.setPostList(arrayList);
         presenter.getPosts();
-        verify(presenter.getPostListFragmentView()).setAdapter(arrayList);
+        verify(presenter.getView()).setAdapter(arrayList);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class PostListFragmentPresenterImplTest {
         posts.add(post);
         presenter.setPostList(posts);
         presenter.onItemClick(0, false);
-        verify(presenter.getPostListFragmentView()).addToBackStack(post);
+        verify(presenter.getView()).addToBackStack(post);
     }
 
     @NotNull

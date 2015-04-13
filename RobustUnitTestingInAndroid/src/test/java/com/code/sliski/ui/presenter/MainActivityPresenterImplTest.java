@@ -25,7 +25,7 @@ public class MainActivityPresenterImplTest {
     @Before
     public void setUp() throws Exception {
         presenter = new MainActivityPresenterImpl();
-        presenter.setMainActivityView(mock(MainActivityView.class));
+        presenter.setView(mock(MainActivityView.class));
         presenter.setPreferencesManager(getPreferencesManager());
     }
 
@@ -33,7 +33,7 @@ public class MainActivityPresenterImplTest {
     public void addFragment_ShouldNotAddFragment() throws Exception {
         presenter.addFragment(mock(Bundle.class));
         MainActivityView mainActivityView =
-                presenter.getMainActivityView();
+                presenter.getView();
         verify(mainActivityView, never()).addLoginFragment();
         verify(mainActivityView, never()).addUserInfoFragment();
     }
@@ -42,14 +42,14 @@ public class MainActivityPresenterImplTest {
     public void addFragment_ShouldAddLoginFragment() throws Exception {
         presenter.getPreferencesManager().userId().put(0L).commit();
         presenter.addFragment(null);
-        verify(presenter.getMainActivityView()).addLoginFragment();
+        verify(presenter.getView()).addLoginFragment();
     }
 
     @Test
     public void addFragment_ShouldAddUserInfoFragment() throws Exception {
         presenter.getPreferencesManager().userId().put(1408086L).commit();
         presenter.addFragment(null);
-        verify(presenter.getMainActivityView()).addUserInfoFragment();
+        verify(presenter.getView()).addUserInfoFragment();
     }
 
     @NotNull

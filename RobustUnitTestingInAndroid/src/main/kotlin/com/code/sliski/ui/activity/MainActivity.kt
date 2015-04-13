@@ -11,6 +11,7 @@ import com.code.sliski.ui.fragment.LoginFragment
 import com.code.sliski.ui.fragment.UserInfoFragment
 import com.code.sliski.ui.presenter.MainActivityPresenter
 import com.code.sliski.ui.presenter.MainActivityPresenterImpl
+import com.code.sliski.util.addFragment
 import javax.inject.Inject
 
 public class MainActivity : ActionBarActivity(), MainActivityView {
@@ -22,22 +23,20 @@ public class MainActivity : ActionBarActivity(), MainActivityView {
         super<ActionBarActivity>.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         App.mGraph.inject(this)
-        (presenter as MainActivityPresenterImpl).mainActivityView = this
-        presenter!!.addFragment(savedInstanceState)
+        presenter?.setView(this)
+        presenter?.addFragment(savedInstanceState)
     }
 
     override fun addLoginFragment() {
-        getSupportFragmentManager().
-                beginTransaction().
-                add(R.id.container, LoginFragment())
-                .commit()
+        addFragment(LoginFragment())
     }
 
     override fun addUserInfoFragment() {
-        getSupportFragmentManager().
-                beginTransaction().
-                add(R.id.container, UserInfoFragment())
-                .commit()
+        addFragment(UserInfoFragment())
+    }
+
+    private fun addFragment(fragment: Fragment) {
+        addFragment(R.id.container, fragment)
     }
 
     override fun onBackPressed() {

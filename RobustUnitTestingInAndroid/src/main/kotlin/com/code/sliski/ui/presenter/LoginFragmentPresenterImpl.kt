@@ -5,7 +5,7 @@ import com.code.sliski.ui.fragment.LoginFragmentView
 
 public class LoginFragmentPresenterImpl : LoginFragmentPresenter {
 
-    var loginFragmentView: LoginFragmentView? = null
+    private var loginFragmentView: LoginFragmentView? = null
     var preferencesManager: PreferencesManager? = null
 
     override public fun login(userId: String) {
@@ -19,5 +19,13 @@ public class LoginFragmentPresenterImpl : LoginFragmentPresenter {
         } catch(e : NumberFormatException) {
             loginFragmentView?.showBadFormatInfo()
         }
+    }
+
+    override fun setView(view: LoginFragmentView) {
+        loginFragmentView = view
+    }
+
+    override fun getView(): LoginFragmentView? {
+        return loginFragmentView;
     }
 }

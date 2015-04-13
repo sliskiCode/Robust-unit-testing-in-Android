@@ -21,7 +21,7 @@ public class UserInfoFragment : Fragment(), UserInfoFragmentView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super<Fragment>.onCreate(savedInstanceState)
         App.mGraph.inject(this)
-        (presenter as UserInfoFragmentPresenterImpl).userInfoFragmentView = this
+        presenter?.setView(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 public class PostListFragmentPresenterImpl() : PostListFragmentPresenter {
 
-    var postListFragmentView : PostListFragmentView? = null
+    private var postListFragmentView : PostListFragmentView? = null
     var client: Client? = null
     var preferencesManager: PreferencesManager? = null
     var postList: ArrayList<Post>? = null
@@ -41,5 +41,13 @@ public class PostListFragmentPresenterImpl() : PostListFragmentPresenter {
     public fun onEvent(event: GetPostsResponseEvent) {
         postList = event.posts
         postListFragmentView?.setAdapter(ArrayList(event.posts))
+    }
+
+    override fun setView(view: PostListFragmentView?) {
+        postListFragmentView = view
+    }
+
+    override fun getView(): PostListFragmentView? {
+        return postListFragmentView
     }
 }

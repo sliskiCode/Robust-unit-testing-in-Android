@@ -32,7 +32,7 @@ public class PostListFragment :
     override public fun onCreate(savedInstanceState: Bundle?) {
         super<ListFragment>.onCreate(savedInstanceState)
         App.mGraph.inject(this)
-        (presenter as PostListFragmentPresenterImpl).postListFragmentView = this
+        presenter?.setView(this)
     }
 
     override public fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -43,7 +43,7 @@ public class PostListFragment :
 
     override fun onPause() {
         super<ListFragment>.onPause()
-        (presenter as PostListFragmentPresenterImpl).postListFragmentView = null
+        presenter?.setView(null)
     }
 
     override fun onItemClick(pv: AdapterView<*>, v: View, p: Int, id: Long) {

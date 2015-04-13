@@ -29,7 +29,7 @@ public class LoginFragment : Fragment(), LoginFragmentView, View.OnClickListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super<Fragment>.onCreate(savedInstanceState)
         App.mGraph.inject(this)
-        (presenter as LoginFragmentPresenterImpl).loginFragmentView = this
+        presenter?.setView(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

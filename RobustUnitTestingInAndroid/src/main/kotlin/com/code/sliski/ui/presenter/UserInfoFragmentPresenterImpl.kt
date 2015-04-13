@@ -5,7 +5,7 @@ import com.code.sliski.ui.fragment.UserInfoFragmentView
 
 public class UserInfoFragmentPresenterImpl : UserInfoFragmentPresenter {
 
-    var userInfoFragmentView: UserInfoFragmentView? = null
+    private var userInfoFragmentView: UserInfoFragmentView? = null
 
     override fun addFragments(savedInstanceState: Bundle?, isTablet: Boolean) {
         if (savedInstanceState == null) {
@@ -14,5 +14,13 @@ public class UserInfoFragmentPresenterImpl : UserInfoFragmentPresenter {
                 userInfoFragmentView?.addPostDetailsFragment()
             }
         }
+    }
+
+    override fun setView(view: UserInfoFragmentView) {
+        userInfoFragmentView = view
+    }
+
+    override fun getView(): UserInfoFragmentView? {
+        return userInfoFragmentView
     }
 }

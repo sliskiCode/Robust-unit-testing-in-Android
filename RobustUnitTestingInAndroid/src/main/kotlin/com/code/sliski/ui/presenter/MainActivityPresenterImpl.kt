@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 public class MainActivityPresenterImpl : MainActivityPresenter {
 
-    var mainActivityView: MainActivityView? = null
+    private var mainActivityView: MainActivityView? = null
     var preferencesManager: PreferencesManager? = null
 
     override fun addFragment(savedInstanceState: Bundle?) {
@@ -19,5 +19,13 @@ public class MainActivityPresenterImpl : MainActivityPresenter {
                 mainActivityView?.addUserInfoFragment()
             }
         }
+    }
+
+    override fun setView(view: MainActivityView) {
+        mainActivityView = view
+    }
+
+    override fun getView(): MainActivityView? {
+        return mainActivityView
     }
 }

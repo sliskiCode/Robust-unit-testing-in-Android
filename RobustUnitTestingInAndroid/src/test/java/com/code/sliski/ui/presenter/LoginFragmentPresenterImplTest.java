@@ -24,22 +24,20 @@ public class LoginFragmentPresenterImplTest {
     @Before
     public void setUp() throws Exception {
         presenter = new LoginFragmentPresenterImpl();
-        presenter.setLoginFragmentView(mock(LoginFragmentView.class));
+        presenter.setView(mock(LoginFragmentView.class));
         presenter.setPreferencesManager(getPreferencesManager());
     }
 
     @Test
     public void login_ShouldShowBadFormatInfo() throws Exception {
         presenter.login("");
-        verify(presenter.getLoginFragmentView()).showBadFormatInfo();
+        verify(presenter.getView()).showBadFormatInfo();
     }
 
     @Test
     public void login_ShouldReplaceFragmentAndSaveIdToPrefs() throws Exception {
         presenter.login("1408086");
-        verify(
-                presenter.getLoginFragmentView()
-        ).replaceWithUserInfoFragment();
+        verify(presenter.getView()).replaceWithUserInfoFragment();
 
         assertEquals(
                 Long.valueOf(1408086L),
