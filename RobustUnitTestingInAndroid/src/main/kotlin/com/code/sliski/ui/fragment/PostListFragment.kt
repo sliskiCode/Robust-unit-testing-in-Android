@@ -41,6 +41,11 @@ public class PostListFragment :
         presenter?.getPosts()
     }
 
+    override fun onPause() {
+        super<ListFragment>.onPause()
+        (presenter as PostListFragmentPresenterImpl).postListFragmentView = null
+    }
+
     override fun onItemClick(pv: AdapterView<*>, v: View, p: Int, id: Long) {
         presenter?.onItemClick(p, isTablet())
     }
