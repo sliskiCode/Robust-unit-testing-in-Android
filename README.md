@@ -5,4 +5,6 @@ Robust unit testing in Android
 
 This is a sample project used in my presentation at [ADB #5 Cracow](http://www.meetup.com/ADB-Android-Developers-Backstage/events/221578987/).
 
+[Sample .apk](https://github.com/sliskiCode/Robust-unit-testing-in-Android/blob/kotlin/slides/RobustUnitTestingInAndroid.apk)
+
 [Link to slides](https://github.com/sliskiCode/Robust-unit-testing-in-Android/blob/kotlin/slides/Robust%20unit%20testing.pdf)
