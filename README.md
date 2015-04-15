@@ -9,4 +9,4 @@ Project shows how to unit test Android aplication written in [Kotlin](http://kot
 
 [Sample .apk](https://drive.google.com/file/d/0B0LC6Jp1eQFHb0dteGpwUGRwZVk/view?usp=sharing)
 
-[Link to slides](https://github.com/sliskiCode/Robust-unit-testing-in-Android/blob/master/slides/Robust%20unit%20testing.pdf)
+[Link to slides](https://github.com/sliskiCode/Robust-unit-testing-in-Android/blob/master/slides/RobustUnitTesting.pdf)
