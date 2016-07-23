@@ -1,5 +1,8 @@
 buildscript {
     ext.kotlin_version = '1.0.0'
+    ext.support_version = '24.0.0'
+    ext.dagger_version = '2.5'
+    ext.retrofit_version = '2.1.0'
     repositories {
         jcenter()
     }
@@ -43,23 +46,26 @@ android {
 }
 
 dependencies {
-    // App
-    compile 'com.android.support:appcompat-v7:24.0.0'
-    compile 'com.android.support:support-v4:24.0.0'
-    compile 'com.github.talenguyen:prettysharedpreferences:1.0.2'
-
-    compile 'com.google.dagger:dagger:2.5'
-    kapt 'com.google.dagger:dagger-compiler:2.5'
-    provided 'org.glassfish:javax.annotation:10.0-b28'
-
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'de.greenrobot:eventbus:2.2.1'
+    // Android
+    compile "com.android.support:appcompat-v7:$support_version"
+    compile "com.android.support:support-v4:$support_version"
 
     // Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Dagger
+    compile "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+
+    // Retrofit
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    compile "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
+    compile 'io.reactivex:rxandroid:1.2.1'
+
+    // Preferences
+    compile 'com.github.talenguyen:prettysharedpreferences:1.0.2'
 }
 
 kapt {
