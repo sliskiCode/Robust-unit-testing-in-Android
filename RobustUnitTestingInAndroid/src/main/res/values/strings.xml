@@ -3,4 +3,7 @@
     <string name="app_name">Stackoverflow</string>
     <string name="preferences">MyPrefs</string>
     <string name="bad_format_info">Bad id format</string>
+    <string name="user_id_hint">User id</string>
+    <string name="default_user_id">1408086</string>
+    <string name="go">GO!</string>
 </resources>

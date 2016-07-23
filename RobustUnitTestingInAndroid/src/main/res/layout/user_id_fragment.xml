@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
@@ -13,10 +12,9 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:id="@+id/imageView"
         android:layout_gravity="center_horizontal|top"
         android:src="@drawable/logo"
-        android:layout_weight="2" />
+        android:layout_weight="2"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,20 +23,20 @@
         android:layout_weight="1">
 
         <EditText
+            android:id="@+id/user_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/user_id_editText"
             android:layout_gravity="center"
-            android:hint="user id"
-            android:text="1408086" />
+            android:hint="@string/user_id_hint"
+            android:text="@string/default_user_id"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="GO!"
-                android:id="@+id/go_button"
-                android:layout_gravity="center_horizontal|bottom"
-                android:textColor="@color/primary"/>
+        <Button
+            android:id="@+id/go_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/go"
+            android:layout_gravity="center_horizontal|bottom"
+            android:textColor="@color/primary"/>
 
     </LinearLayout>
 
