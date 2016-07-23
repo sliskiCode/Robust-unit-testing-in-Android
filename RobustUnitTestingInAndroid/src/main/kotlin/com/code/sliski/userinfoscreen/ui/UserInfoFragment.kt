@@ -27,9 +27,9 @@ class UserInfoFragment : Fragment(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DaggerUserInfoComponent.builder()
-                .userInfoModule(UserInfoModule())
-                .build()
-                .inject(this)
+                               .userInfoModule(UserInfoModule())
+                               .build()
+                               .inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =

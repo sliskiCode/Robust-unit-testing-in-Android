@@ -32,3 +32,6 @@ fun Fragment.showMessage(messageResId: Int) {
                    activity.getString(messageResId),
                    Toast.LENGTH_SHORT).show()
 }
+
+@Suppress("UNCHECKED_CAST")
+fun <T> Fragment.application() = activity.application as T

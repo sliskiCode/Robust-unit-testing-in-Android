@@ -6,6 +6,7 @@ import com.code.sliski.App
 import com.code.sliski.R.id.container
 import com.code.sliski.R.layout.activity_main
 import com.code.sliski.extension.addFragment
+import com.code.sliski.extension.application
 import com.code.sliski.loginscreen.ui.LoginFragment
 import com.code.sliski.mainscreen.di.DaggerMainComponent
 import com.code.sliski.mainscreen.di.MainModule
@@ -22,10 +23,10 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(activity_main)
         DaggerMainComponent.builder()
-                .appComponent((applicationContext as App).component)
-                .mainModule(MainModule())
-                .build()
-                .inject(this)
+                           .appComponent(application<App>().component)
+                           .mainModule(MainModule())
+                           .build()
+                           .inject(this)
         presenter.attachView(this)
         presenter.buildView(savedInstanceState)
     }

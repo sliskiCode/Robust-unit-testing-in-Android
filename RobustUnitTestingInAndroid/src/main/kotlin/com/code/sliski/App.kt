@@ -14,19 +14,19 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         component = DaggerAppComponent.builder()
-                .appModule(AppModule(this))
-                .build()
+                                      .appModule(AppModule(this))
+                                      .build()
     }
 
-    fun postListComponent(): PostListComponent? {
+    fun postListComponent(): PostListComponent {
         if (postListComponent == null) {
             postListComponent = DaggerPostListComponent.builder()
-                    .appComponent(component)
-                    .postListModule(PostListModule())
-                    .build()
+                                                       .appComponent(component)
+                                                       .postListModule(PostListModule())
+                                                       .build()
         }
 
-        return postListComponent
+        return postListComponent!!
     }
 
     fun destroyPostListComponent() {

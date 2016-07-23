@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.code.sliski.App
 import com.code.sliski.R.layout.user_id_fragment
 import com.code.sliski.R.string.bad_format_info
+import com.code.sliski.extension.application
 import com.code.sliski.extension.replaceWith
 import com.code.sliski.extension.showMessage
 import com.code.sliski.loginscreen.di.DaggerLoginComponent
@@ -25,10 +26,10 @@ class LoginFragment : Fragment(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DaggerLoginComponent.builder()
-                .appComponent((activity.applicationContext as App).component)
-                .loginModule(LoginModule())
-                .build()
-                .inject(this)
+                            .appComponent(application<App>().component)
+                            .loginModule(LoginModule())
+                            .build()
+                            .inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater,

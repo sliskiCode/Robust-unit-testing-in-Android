@@ -10,6 +10,7 @@ import com.code.sliski.App
 import com.code.sliski.R.id.list_container
 import com.code.sliski.api.model.Post
 import com.code.sliski.extension.addToBackStack
+import com.code.sliski.extension.application
 import com.code.sliski.extension.isTablet
 import com.code.sliski.postdetailsscreen.OnPostClickListener
 import com.code.sliski.postdetailsscreen.PostDetailsFragment
@@ -26,7 +27,7 @@ class PostListFragment : ListFragment(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (activity.applicationContext as App).postListComponent()!!.inject(this)
+        application<App>().postListComponent().inject(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

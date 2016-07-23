@@ -8,3 +8,6 @@ fun AppCompatActivity.addFragment(layoutId: Int, fragment: Fragment) =
                 .beginTransaction()
                 .add(layoutId, fragment)
                 .commit()
+
+@Suppress("UNCHECKED_CAST")
+fun <T> AppCompatActivity.application() = application as T
