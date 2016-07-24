@@ -1,22 +1,19 @@
 package com.code.sliski.mainscreen.ui
 
 import android.os.Bundle
-import com.code.sliski.preference.PreferencesManager
+import com.code.sliski.extension.ifNull
 
-class MainActivityPresenter(private var preferencesManager: PreferencesManager) : MainActivityMVP.Presenter {
+class MainActivityPresenter(private var userId: Long) : MainActivityMVP.Presenter {
 
     private var view: MainActivityMVP.View? = null
 
-    override fun buildView(savedInstanceState: Bundle?) {
-        if (savedInstanceState == null) {
-            val userId = preferencesManager.userId().getOr(0L)
-            if (userId == 0L) {
-                view?.addLoginFragment()
-            } else {
-                view?.addUserInfoFragment()
+    override fun buildView(savedInstanceState: Bundle?) =
+            savedInstanceState.ifNull {
+                if (userId == 0L)
+                    view?.addLoginFragment()
+                else
+                    view?.addUserInfoFragment()
             }
-        }
-    }
 
     override fun attachView(view: MainActivityMVP.View) {
         this.view = view

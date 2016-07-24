@@ -10,6 +10,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+        classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.8'
     }
 }
 
@@ -23,6 +24,7 @@ allprojects {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'groovyx.grooid.groovy-android'
 
 android {
     compileSdkVersion 24
@@ -66,6 +68,15 @@ dependencies {
 
     // Preferences
     compile 'com.github.talenguyen:prettysharedpreferences:1.0.2'
+
+    // Spock
+    testCompile 'org.codehaus.groovy:groovy:2.4.7:grooid'
+    testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
+        exclude group: 'org.codehaus.groovy'
+        exclude group: 'junit'
+    }
+    testCompile 'cglib:cglib-nodep:3.2.0'
+    testCompile 'org.objenesis:objenesis:2.2'
 }
 
 kapt {

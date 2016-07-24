@@ -7,25 +7,28 @@ import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class PostListFragmentPresenterImpl(private var client: Client,
-                                    private var preferencesManager: PreferencesManager,
-                                    private var postList: List<Post>) : PostListFragmentMVP.Presenter {
+class PostListFragmentPresenter(private var client: Client,
+                                private var preferencesManager: PreferencesManager,
+                                private var postList: List<Post>) : PostListFragmentMVP.Presenter {
 
     private var view: PostListFragmentMVP.View? = null
 
     private lateinit var postsSubscription: Subscription
 
+    private val schedulerIO = Schedulers.io()
+    private val schedulerUI = AndroidSchedulers.mainThread()
+
     override fun loadData() {
         if (postList.isNotEmpty()) {
             view?.setAdapter(postList)
         } else {
-            val userId = preferencesManager.userId().getOr(0L)
-            val posts = client.getPosts(userId as Long)
+            val userId = preferencesManager.getUserId()
+            val posts = client.getPosts(userId)
             postsSubscription = posts
-                    .subscribeOn(Schedulers.io())
+                    .subscribeOn(schedulerIO)
                     .map { it.posts }
                     .doOnNext { postList = it }
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .observeOn(schedulerUI)
                     .doOnCompleted {
                         view?.setAdapter(postList)
                         postsSubscription.unsubscribe()

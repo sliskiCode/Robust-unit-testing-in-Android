@@ -1,11 +1,7 @@
 package com.code.sliski.preference
 
-import android.content.SharedPreferences
-import com.tale.prettysharedpreferences.LongEditor
-import com.tale.prettysharedpreferences.PrettySharedPreferences
+interface PreferencesManager {
 
-class PreferencesManager(sharedPreferences: SharedPreferences) :
-        PrettySharedPreferences<PreferencesManager>(sharedPreferences) {
-
-    fun userId(): LongEditor<*> = getLongEditor("userId")
+    fun saveUserId(userId: Long)
+    fun getUserId(): Long
 }

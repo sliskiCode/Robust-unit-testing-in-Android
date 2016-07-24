@@ -5,8 +5,9 @@ import com.code.sliski.api.StackoverflowApi
 import com.code.sliski.api.StackoverflowClient
 import com.code.sliski.api.model.Post
 import com.code.sliski.postlistscreen.ui.PostListFragmentMVP
-import com.code.sliski.postlistscreen.ui.PostListFragmentPresenterImpl
+import com.code.sliski.postlistscreen.ui.PostListFragmentPresenter
 import com.code.sliski.preference.PreferencesManager
+import com.code.sliski.preference.PreferencesManagerImpl
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -22,9 +23,9 @@ class PostListModule {
     fun providePostListFragmentPresenter(client: Client,
                                          preferencesManager: PreferencesManager,
                                          posts: ArrayList<Post>): PostListFragmentMVP.Presenter =
-            PostListFragmentPresenterImpl(client,
-                                          preferencesManager,
-                                          posts)
+            PostListFragmentPresenter(client,
+                                      preferencesManager,
+                                      posts)
 
     @Provides
     @PostListScope

@@ -12,17 +12,19 @@ import kotlinx.android.synthetic.main.details_fragment.*
 class PostDetailsFragment : Fragment(),
                             OnPostClickListener {
 
-    val POST: String = "POST"
-
-    lateinit var post: Post
-
     companion object {
+        val POST: String = "POST"
+
         fun getInstance(post: Post): PostDetailsFragment {
-            val postDetailsFragment = PostDetailsFragment()
-            postDetailsFragment.post = post
-            return postDetailsFragment
+            val fragment = PostDetailsFragment()
+            val arguments = Bundle()
+            arguments.putParcelable(POST, post)
+            fragment.arguments = arguments
+            return fragment
         }
     }
+
+    private lateinit var post: Post
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -31,9 +33,7 @@ class PostDetailsFragment : Fragment(),
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (savedInstanceState != null) {
-            post = savedInstanceState.getParcelable(POST)
-        }
+        post = arguments.getParcelable(POST)
 
         updateView()
     }
@@ -46,10 +46,5 @@ class PostDetailsFragment : Fragment(),
     private fun updateView() {
         score.text = post.score.toString()
         link.text = post.link
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putParcelable(POST, post)
     }
 }
