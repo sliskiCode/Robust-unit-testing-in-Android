@@ -7,19 +7,19 @@ class LoginFragmentPresenter(private var preferencesManager: PreferencesManager)
 
     private var view: LoginFragmentMVP.View? = null
 
-    override fun attemptLogin(userId: String) =
+    override fun present(userId: String) =
             if (userId.isPositiveNumber()) {
                 preferencesManager.saveUserId(userId.toLong())
-                view?.goToUserInfo()
+                view?.showUserInfoScreen()
             } else {
                 view?.showBadFormatInfo()
             }
 
-    override fun attachView(view: LoginFragmentMVP.View) {
+    override fun attach(view: LoginFragmentMVP.View) {
         this.view = view
     }
 
-    override fun detachView() {
+    override fun detach() {
         this.view = null
     }
 }

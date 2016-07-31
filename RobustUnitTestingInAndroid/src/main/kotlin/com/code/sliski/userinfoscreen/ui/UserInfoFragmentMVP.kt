@@ -5,13 +5,13 @@ import android.os.Bundle
 interface UserInfoFragmentMVP {
 
     interface View {
-        fun addPostListFragment()
-        fun addPostDetailsFragment()
+        fun showPostListScreen()
+        fun showPostDetailsScreen()
     }
 
     interface Presenter {
-        fun buildView(savedInstanceState: Bundle?, isTablet: Boolean)
-        fun attachView(view: View)
-        fun detachView()
+        fun present(savedInstanceState: Bundle?, isTablet: Boolean)
+        fun attach(view: View)
+        fun detach()
     }
 }

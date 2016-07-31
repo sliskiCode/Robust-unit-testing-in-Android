@@ -29,7 +29,7 @@ class App : Application() {
         return postListComponent!!
     }
 
-    fun destroyPostListComponent() {
+    fun releasePostListComponent() {
         postListComponent = null
     }
 }

@@ -13,13 +13,13 @@ class LoginFragmentPresenterTest extends Specification {
 
     void setup() {
         tested = new LoginFragmentPresenter(preferencesManagerMock)
-        tested.attachView(viewMock)
+        tested.attach(viewMock)
     }
 
     @Unroll
     def "attemptLogin #should save user id to preferences manager"() {
         when:
-        tested.attemptLogin(userId)
+        tested.present(userId)
 
         then:
         times * preferencesManagerMock.saveUserId(userIdLong as Long)
@@ -33,10 +33,10 @@ class LoginFragmentPresenterTest extends Specification {
     @Unroll
     def "attemptLogin #should go to user info"() {
         when:
-        tested.attemptLogin(userId)
+        tested.present(userId)
 
         then:
-        times * viewMock.goToUserInfo()
+        times * viewMock.showUserInfoScreen()
 
         where:
         should       | times | userId
@@ -47,7 +47,7 @@ class LoginFragmentPresenterTest extends Specification {
     @Unroll
     def "attemptLogin #should show bad format info"() {
         when:
-        tested.attemptLogin(userId)
+        tested.present(userId)
 
         then:
         times * viewMock.showBadFormatInfo()

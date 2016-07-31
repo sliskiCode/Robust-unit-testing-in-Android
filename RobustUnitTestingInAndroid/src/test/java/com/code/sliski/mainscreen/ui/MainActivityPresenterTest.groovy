@@ -14,13 +14,13 @@ class MainActivityPresenterTest extends Specification {
     def "buildView #should add post login fragment"() {
         given:
         tested = new MainActivityPresenter(userId)
-        tested.attachView(view)
+        tested.attach(view)
 
         when:
-        tested.buildView(savedInstanceState)
+        tested.present(savedInstanceState)
 
         then:
-        times * view.addLoginFragment()
+        times * view.showLoginScreen()
 
         where:
         should       | times | savedInstanceState | userId
@@ -34,13 +34,13 @@ class MainActivityPresenterTest extends Specification {
     def "buildView #should add user info fragment"() {
         given:
         tested = new MainActivityPresenter(userId)
-        tested.attachView(view)
+        tested.attach(view)
 
         when:
-        tested.buildView(savedInstanceState)
+        tested.present(savedInstanceState)
 
         then:
-        times * view.addUserInfoFragment()
+        times * view.showUserInfoScreen()
 
         where:
         should       | times | savedInstanceState | userId

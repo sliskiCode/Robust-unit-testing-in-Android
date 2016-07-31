@@ -4,12 +4,12 @@ interface LoginFragmentMVP {
 
     interface View {
         fun showBadFormatInfo()
-        fun goToUserInfo()
+        fun showUserInfoScreen()
     }
 
     interface Presenter {
-        fun attemptLogin(userId: String): Unit?
-        fun attachView(view: View)
-        fun detachView()
+        fun present(userId: String): Unit?
+        fun attach(view: View)
+        fun detach()
     }
 }

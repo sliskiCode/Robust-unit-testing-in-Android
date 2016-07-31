@@ -27,25 +27,25 @@ class MainActivity : AppCompatActivity(),
                            .mainModule(MainModule())
                            .build()
                            .inject(this)
-        presenter.attachView(this)
-        presenter.buildView(savedInstanceState)
+        presenter.attach(this)
+        presenter.present(savedInstanceState)
     }
 
     override fun onStart() {
         super.onStart()
-        presenter.attachView(this)
+        presenter.attach(this)
     }
 
     override fun onStop() {
         super.onStop()
-        presenter.detachView()
+        presenter.detach()
     }
 
-    override fun addLoginFragment() {
+    override fun showLoginScreen() {
         addFragment(container, LoginFragment())
     }
 
-    override fun addUserInfoFragment() {
+    override fun showUserInfoScreen() {
         addFragment(container, UserInfoFragment())
     }
 

@@ -5,13 +5,13 @@ import android.os.Bundle
 interface MainActivityMVP {
 
     interface View {
-        fun addLoginFragment()
-        fun addUserInfoFragment()
+        fun showLoginScreen()
+        fun showUserInfoScreen()
     }
 
     interface Presenter {
-        fun buildView(savedInstanceState: Bundle?)
-        fun attachView(view: View)
-        fun detachView()
+        fun present(savedInstanceState: Bundle?)
+        fun attach(view: View)
+        fun detach()
     }
 }

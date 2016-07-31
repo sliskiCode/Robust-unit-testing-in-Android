@@ -12,16 +12,16 @@ class UserInfoFragmentPresenterTest extends Specification {
 
     void setup() {
         tested = new UserInfoFragmentPresenter()
-        tested.attachView(view)
+        tested.attach(view)
     }
 
     @Unroll
     def "buildView #should add post list fragment"() {
         when:
-        tested.buildView(savedInstanceState, isTablet)
+        tested.present(savedInstanceState, isTablet)
 
         then:
-        times * view.addPostListFragment()
+        times * view.showPostListScreen()
 
         where:
         should       | times | savedInstanceState | isTablet
@@ -32,10 +32,10 @@ class UserInfoFragmentPresenterTest extends Specification {
     @Unroll
     def "buildView #should add post details fragment"() {
         when:
-        tested.buildView(savedInstanceState, isTablet)
+        tested.present(savedInstanceState, isTablet)
 
         then:
-        times * view.addPostDetailsFragment()
+        times * view.showPostDetailsScreen()
 
         where:
         should       | times | savedInstanceState | isTablet

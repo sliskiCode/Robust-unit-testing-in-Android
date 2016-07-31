@@ -39,27 +39,27 @@ class LoginFragment : Fragment(),
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        presenter.attachView(this)
+        presenter.attach(this)
         go_button.setOnClickListener() {
-            presenter.attemptLogin(user_id.text.toString())
+            presenter.present(user_id.text.toString())
         }
     }
 
     override fun onStart() {
         super.onStart()
-        presenter.attachView(this)
+        presenter.attach(this)
     }
 
     override fun onStop() {
         super.onStop()
-        presenter.detachView()
+        presenter.detach()
     }
 
     override fun showBadFormatInfo() {
         showMessage(bad_format_info)
     }
 
-    override fun goToUserInfo() {
+    override fun showUserInfoScreen() {
         replaceWith(UserInfoFragment())
     }
 }

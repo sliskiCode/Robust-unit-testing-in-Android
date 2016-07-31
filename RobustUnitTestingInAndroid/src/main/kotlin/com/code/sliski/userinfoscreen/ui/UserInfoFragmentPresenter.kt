@@ -7,20 +7,20 @@ class UserInfoFragmentPresenter : UserInfoFragmentMVP.Presenter {
 
     private var view: UserInfoFragmentMVP.View? = null
 
-    override fun buildView(savedInstanceState: Bundle?,
-                           isTablet: Boolean) =
+    override fun present(savedInstanceState: Bundle?,
+                         isTablet: Boolean) =
             savedInstanceState.ifNull {
-                view?.addPostListFragment()
+                view?.showPostListScreen()
                 if (isTablet) {
-                    view?.addPostDetailsFragment()
+                    view?.showPostDetailsScreen()
                 }
             }
 
-    override fun attachView(view: UserInfoFragmentMVP.View) {
+    override fun attach(view: UserInfoFragmentMVP.View) {
         this.view = view
     }
 
-    override fun detachView() {
+    override fun detach() {
         this.view = null
     }
 }

@@ -7,19 +7,19 @@ class MainActivityPresenter(private var userId: Long) : MainActivityMVP.Presente
 
     private var view: MainActivityMVP.View? = null
 
-    override fun buildView(savedInstanceState: Bundle?) =
+    override fun present(savedInstanceState: Bundle?) =
             savedInstanceState.ifNull {
                 if (userId == 0L)
-                    view?.addLoginFragment()
+                    view?.showLoginScreen()
                 else
-                    view?.addUserInfoFragment()
+                    view?.showUserInfoScreen()
             }
 
-    override fun attachView(view: MainActivityMVP.View) {
+    override fun attach(view: MainActivityMVP.View) {
         this.view = view
     }
 
-    override fun detachView() {
+    override fun detach() {
         this.view = null
     }
 }

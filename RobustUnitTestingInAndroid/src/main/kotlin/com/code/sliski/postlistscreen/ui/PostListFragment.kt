@@ -33,32 +33,32 @@ class PostListFragment : ListFragment(),
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         listView.onItemClickListener = this
-        presenter.attachView(this)
-        presenter.loadData()
+        presenter.attach(this)
+        presenter.present()
     }
 
     override fun onStart() {
         super.onStart()
-        presenter.attachView(this)
+        presenter.attach(this)
     }
 
     override fun onStop() {
         super.onStop()
-        presenter.detachView()
+        presenter.detach()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         if (activity.isFinishing) {
-            (activity.applicationContext as App).destroyPostListComponent()
+            application<App>().releasePostListComponent()
         }
     }
 
-    override fun setAdapter(posts: List<Post>) {
+    override fun showPosts(posts: List<Post>) {
         listAdapter = ArrayAdapter(activity, simple_list_item_1, posts)
     }
 
-    override fun addToBackStack(post: Post) {
+    override fun showPostDetailsScreen(post: Post) {
         addToBackStack(list_container, PostDetailsFragment.getInstance(post))
     }
 

@@ -37,26 +37,26 @@ class UserInfoFragment : Fragment(),
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        presenter.attachView(this)
-        presenter.buildView(savedInstanceState, isTablet())
+        presenter.attach(this)
+        presenter.present(savedInstanceState, isTablet())
     }
 
     override fun onStart() {
         super.onStart()
-        presenter.attachView(this)
+        presenter.attach(this)
     }
 
     override fun onStop() {
         super.onStop()
-        presenter.detachView()
+        presenter.detach()
     }
 
-    override fun addPostListFragment() {
+    override fun showPostListScreen() {
         postListFragment = PostListFragment()
         addChildFragment(list_container, postListFragment)
     }
 
-    override fun addPostDetailsFragment() {
+    override fun showPostDetailsScreen() {
         val detailsFragment = PostDetailsFragment()
         postListFragment.onPostClickListener = detailsFragment
         addChildFragment(preview_container, detailsFragment)
