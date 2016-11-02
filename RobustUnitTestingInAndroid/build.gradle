@@ -1,13 +1,13 @@
 buildscript {
-    ext.kotlin_version = '1.0.0'
-    ext.support_version = '24.1.1'
+    ext.kotlin_version = '1.0.4'
+    ext.support_version = '25.0.0'
     ext.dagger_version = '2.5'
     ext.retrofit_version = '2.1.0'
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.2'
+        classpath 'com.android.tools.build:gradle:2.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
         classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.8'
@@ -27,13 +27,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'groovyx.grooid.groovy-android'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '24.0.0'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.code.sliski.ui"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
