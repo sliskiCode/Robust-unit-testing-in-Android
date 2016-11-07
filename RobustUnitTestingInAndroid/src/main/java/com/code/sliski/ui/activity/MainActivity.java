@@ -23,9 +23,9 @@ public class MainActivity extends ActionBarActivity {
 
     private void addFragment() {
         PrefManager prefManager = new PrefManager(getSharedPreferences(getString(R.string.preferences), MODE_PRIVATE));
-        long userId = prefManager.userId().getOr(0l);
+        long userId = prefManager.userId().getOr(0L);
         Fragment fragment;
-        if (userId == 0l) {
+        if (userId == 0L) {
             fragment = new UserIdFragment();
         } else {
             fragment = new UserInfoFragment();
