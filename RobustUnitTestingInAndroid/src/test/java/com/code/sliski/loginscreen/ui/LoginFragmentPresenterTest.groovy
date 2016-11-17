@@ -17,7 +17,7 @@ class LoginFragmentPresenterTest extends Specification {
     }
 
     @Unroll
-    def "attemptLogin #should save user id to preferences manager"() {
+    def "#should save user id to preferences manager"() {
         when:
         tested.present(userId)
 
@@ -31,7 +31,7 @@ class LoginFragmentPresenterTest extends Specification {
     }
 
     @Unroll
-    def "attemptLogin #should go to user info"() {
+    def "#should go to user info"() {
         when:
         tested.present(userId)
 
@@ -45,7 +45,7 @@ class LoginFragmentPresenterTest extends Specification {
     }
 
     @Unroll
-    def "attemptLogin #should show bad format info"() {
+    def "#should show bad format info"() {
         when:
         tested.present(userId)
 

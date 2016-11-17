@@ -11,6 +11,8 @@ import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 @Module
 class PostListModule {
@@ -19,7 +21,11 @@ class PostListModule {
     @PostListScope
     fun providePostListFragmentPresenter(client: Client,
                                          preferencesManager: PreferencesManager): PostListFragmentMVP.Presenter =
-            PostListFragmentPresenter(client, preferencesManager)
+            PostListFragmentPresenter(client,
+                                      preferencesManager,
+                                      emptyList(),
+                                      Schedulers.io(),
+                                      AndroidSchedulers.mainThread())
 
     @Provides
     @PostListScope

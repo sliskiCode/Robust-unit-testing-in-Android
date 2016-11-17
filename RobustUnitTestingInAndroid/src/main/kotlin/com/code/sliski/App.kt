@@ -7,16 +7,13 @@ import com.code.sliski.postlistscreen.di.PostListModule
 
 class App : Application() {
 
-    lateinit var component: AppComponent
-
-    private var postListComponent: PostListComponent? = null
-
-    override fun onCreate() {
-        super.onCreate()
-        component = DaggerAppComponent.builder()
-                                      .appModule(AppModule(this))
-                                      .build()
+    val component: AppComponent by lazy {
+        DaggerAppComponent.builder()
+                          .appModule(AppModule(this))
+                          .build()
     }
+
+    var postListComponent: PostListComponent? = null
 
     fun postListComponent(): PostListComponent {
         if (postListComponent == null) {

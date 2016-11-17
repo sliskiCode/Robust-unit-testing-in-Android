@@ -8,6 +8,7 @@ interface PostListFragmentMVP {
         fun showPosts(posts: List<Post>)
         fun showPostDetailsScreen(post: Post)
         fun notifyOnPostClicked(post: Post)
+        fun showError(message: String)
     }
 
     interface Presenter {
@@ -15,5 +16,6 @@ interface PostListFragmentMVP {
         fun onItemClick(position: Int, isTablet: Boolean)
         fun attach(view: View?)
         fun detach()
+        fun unsubscribe()
     }
 }

@@ -28,8 +28,12 @@ fun Fragment.addChildFragment(layoutId: Int, fragment: Fragment) =
                 .commit()
 
 fun Fragment.showMessage(messageResId: Int) {
+    showMessage(activity.getString(messageResId))
+}
+
+fun Fragment.showMessage(message: String) {
     Toast.makeText(activity,
-                   activity.getString(messageResId),
+                   message,
                    Toast.LENGTH_SHORT).show()
 }
 

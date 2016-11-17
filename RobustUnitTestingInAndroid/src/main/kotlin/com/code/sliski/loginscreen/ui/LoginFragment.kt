@@ -40,7 +40,7 @@ class LoginFragment : Fragment(),
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         presenter.attach(this)
-        go_button.setOnClickListener() {
+        go_button.setOnClickListener {
             presenter.present(user_id.text.toString())
         }
     }

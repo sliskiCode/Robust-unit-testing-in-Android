@@ -12,6 +12,7 @@ import com.code.sliski.api.model.Post
 import com.code.sliski.extension.addToBackStack
 import com.code.sliski.extension.application
 import com.code.sliski.extension.isTablet
+import com.code.sliski.extension.showMessage
 import com.code.sliski.postdetailsscreen.OnPostClickListener
 import com.code.sliski.postdetailsscreen.PostDetailsFragment
 import javax.inject.Inject
@@ -50,6 +51,7 @@ class PostListFragment : ListFragment(),
     override fun onDestroy() {
         super.onDestroy()
         if (activity.isFinishing) {
+            presenter.unsubscribe()
             application<App>().releasePostListComponent()
         }
     }
@@ -68,5 +70,9 @@ class PostListFragment : ListFragment(),
 
     override fun onItemClick(pv: AdapterView<*>, v: View, p: Int, id: Long) {
         presenter.onItemClick(p, isTablet())
+    }
+
+    override fun showError(message: String) {
+        showMessage(message)
     }
 }

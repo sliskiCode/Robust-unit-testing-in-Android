@@ -1,6 +1,6 @@
 buildscript {
-    ext.kotlin_version = '1.0.4'
-    ext.support_version = '25.0.0'
+    ext.kotlin_version = '1.0.5-2'
+    ext.support_version = '25.0.1'
     ext.dagger_version = '2.5'
     ext.retrofit_version = '2.1.0'
     repositories {
@@ -10,7 +10,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
-        classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.8'
+        classpath 'org.codehaus.groovy:groovy-android-gradle-plugin:1.1.0'
     }
 }
 
@@ -22,9 +22,9 @@ allprojects {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'groovyx.android'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'groovyx.grooid.groovy-android'
 
 android {
     compileSdkVersion 25
@@ -77,6 +77,7 @@ dependencies {
     }
     testCompile 'cglib:cglib-nodep:3.2.0'
     testCompile 'org.objenesis:objenesis:2.2'
+    testCompile 'junit:junit:4.12'
 }
 
 kapt {

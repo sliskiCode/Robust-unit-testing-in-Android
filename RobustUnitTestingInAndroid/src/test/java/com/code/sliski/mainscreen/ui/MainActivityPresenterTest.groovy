@@ -11,7 +11,7 @@ class MainActivityPresenterTest extends Specification {
     MainActivityPresenter tested
 
     @Unroll
-    def "buildView #should add post login fragment"() {
+    def "#should add post login fragment"() {
         given:
         tested = new MainActivityPresenter(userId)
         tested.attach(view)
@@ -31,7 +31,7 @@ class MainActivityPresenterTest extends Specification {
     }
 
     @Unroll
-    def "buildView #should add user info fragment"() {
+    def "#should add user info fragment"() {
         given:
         tested = new MainActivityPresenter(userId)
         tested.attach(view)

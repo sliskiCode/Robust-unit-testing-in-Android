@@ -16,7 +16,7 @@ class UserInfoFragmentPresenterTest extends Specification {
     }
 
     @Unroll
-    def "buildView #should add post list fragment"() {
+    def "#should add post list fragment"() {
         when:
         tested.present(savedInstanceState, isTablet)
 
@@ -30,7 +30,7 @@ class UserInfoFragmentPresenterTest extends Specification {
     }
 
     @Unroll
-    def "buildView #should add post details fragment"() {
+    def "#should add post details fragment"() {
         when:
         tested.present(savedInstanceState, isTablet)
 

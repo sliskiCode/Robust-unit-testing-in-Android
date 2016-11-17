@@ -3,22 +3,22 @@ package com.code.sliski.postlistscreen.ui
 import com.code.sliski.api.Client
 import com.code.sliski.api.model.Post
 import com.code.sliski.preference.PreferencesManager
+import rx.Scheduler
+import rx.Subscriber
 import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.util.*
 
-class PostListFragmentPresenter(private var client: Client,
-                                private var preferencesManager: PreferencesManager,
-                                private var postList: List<Post> = ArrayList()) :
-        PostListFragmentMVP.Presenter {
+class PostListFragmentPresenter(private val client: Client,
+                                private val preferencesManager: PreferencesManager,
+                                private var postList: List<Post>,
+                                private val schedulerIO: Scheduler,
+                                private val schedulerUI: Scheduler) : PostListFragmentMVP.Presenter {
 
     private var view: PostListFragmentMVP.View? = null
 
     private lateinit var postsSubscription: Subscription
-
-    private val schedulerIO = Schedulers.io()
-    private val schedulerUI = AndroidSchedulers.mainThread()
 
     override fun present() {
         if (postList.isNotEmpty()) {
@@ -26,16 +26,10 @@ class PostListFragmentPresenter(private var client: Client,
         } else {
             val userId = preferencesManager.getUserId()
             val posts = client.getPosts(userId)
-            postsSubscription = posts
-                    .subscribeOn(schedulerIO)
-                    .map { it.posts }
-                    .doOnNext { postList = it }
-                    .observeOn(schedulerUI)
-                    .doOnCompleted {
-                        view?.showPosts(postList)
-                        postsSubscription.unsubscribe()
-                    }
-                    .subscribe()
+            postsSubscription = posts.subscribeOn(schedulerIO)
+                                     .map { it.posts }
+                                     .observeOn(schedulerUI)
+                                     .subscribe(PostSubscriber())
         }
     }
 
@@ -53,5 +47,23 @@ class PostListFragmentPresenter(private var client: Client,
 
     override fun detach() {
         this.view = null
+    }
+
+    override fun unsubscribe() {
+        if (postsSubscription.isUnsubscribed) postsSubscription.unsubscribe()
+    }
+
+    inner class PostSubscriber : Subscriber<List<Post>>() {
+        override fun onCompleted() {
+            view?.showPosts(postList)
+        }
+
+        override fun onNext(next: List<Post>) {
+            postList = next
+        }
+
+        override fun onError(e: Throwable) {
+            view?.showError(e.message!!)
+        }
     }
 }
