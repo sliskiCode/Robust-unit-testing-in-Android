@@ -22,7 +22,7 @@ class LoginFragmentPresenterTest extends Specification {
         tested.present(userId)
 
         then:
-        0 * preferencesManagerMock.saveUserId(userIdLong as Long)
+        times * preferencesManagerMock.saveUserId(userIdLong as Long)
 
         where:
         should       | times | userId       | userIdLong
