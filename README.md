@@ -1,5 +1,3 @@
-https://circleci.com/gh/:sliskiCode/:repo.png?circle-token=:c15de57b0abf6cbbc08672dbd73ab5b5d278e6fb
-
 Robust unit testing in Android
 ==============================
 
