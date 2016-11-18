@@ -1,3 +1,6 @@
+[![Circle
+CI](https://circleci.com/gh/sliskiCode/Robust-unit-testing-in-Android.svg?style=svg)](https://circleci.com/gh/sliskiCode/Robust-unit-testing-in-Android)
+
 Robust unit testing in Android
 ==============================
 
