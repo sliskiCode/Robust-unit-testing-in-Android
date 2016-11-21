@@ -6,7 +6,7 @@ import spock.lang.Unroll
 
 class UserInfoFragmentPresenterTest extends Specification {
 
-    UserInfoFragmentMVP.View view = Mock(UserInfoFragmentMVP.View)
+    View view = Mock(View)
 
     UserInfoFragmentPresenter tested
 

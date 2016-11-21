@@ -7,7 +7,7 @@ import spock.lang.Unroll
 class LoginFragmentPresenterTest extends Specification {
 
     PreferencesManager preferencesManagerMock = Mock(PreferencesManager)
-    LoginFragmentMVP.View viewMock = Mock(LoginFragmentMVP.View)
+    View viewMock = Mock(View)
 
     LoginFragmentPresenter tested
 

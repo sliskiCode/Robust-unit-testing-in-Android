@@ -3,7 +3,7 @@ package com.code.sliski.userinfoscreen.ui
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
+import android.view.View as AndroidView
 import android.view.ViewGroup
 import com.code.sliski.R.id.list_container
 import com.code.sliski.R.id.preview_container
@@ -16,11 +16,10 @@ import com.code.sliski.userinfoscreen.di.DaggerUserInfoComponent
 import com.code.sliski.userinfoscreen.di.UserInfoModule
 import javax.inject.Inject
 
-class UserInfoFragment : Fragment(),
-                         UserInfoFragmentMVP.View {
+class UserInfoFragment : Fragment(), View {
 
     @Inject
-    lateinit var presenter: UserInfoFragmentMVP.Presenter
+    lateinit var presenter: UserInfoFragmentPresenter
 
     private lateinit var postListFragment: PostListFragment
 
@@ -32,7 +31,7 @@ class UserInfoFragment : Fragment(),
                                .inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): AndroidView =
             inflater.inflate(user_info_fragment, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

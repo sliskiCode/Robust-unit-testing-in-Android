@@ -3,7 +3,7 @@ package com.code.sliski.postlistscreen.ui
 import android.R.layout.simple_list_item_1
 import android.os.Bundle
 import android.support.v4.app.ListFragment
-import android.view.View
+import android.view.View as AndroidView
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.code.sliski.App
@@ -18,11 +18,11 @@ import com.code.sliski.postdetailsscreen.PostDetailsFragment
 import javax.inject.Inject
 
 class PostListFragment : ListFragment(),
-                         PostListFragmentMVP.View,
+                         View,
                          AdapterView.OnItemClickListener {
 
     @Inject
-    lateinit var presenter: PostListFragmentMVP.Presenter
+    lateinit var presenter: PostListFragmentPresenter
 
     lateinit var onPostClickListener: OnPostClickListener
 
@@ -68,7 +68,7 @@ class PostListFragment : ListFragment(),
         onPostClickListener.onPostClick(post)
     }
 
-    override fun onItemClick(pv: AdapterView<*>, v: View, p: Int, id: Long) {
+    override fun onItemClick(pv: AdapterView<*>, v: AndroidView, p: Int, id: Long) {
         presenter.onItemClick(p, isTablet())
     }
 

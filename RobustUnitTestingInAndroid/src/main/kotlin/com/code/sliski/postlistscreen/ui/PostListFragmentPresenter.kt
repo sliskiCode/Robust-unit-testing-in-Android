@@ -2,54 +2,35 @@ package com.code.sliski.postlistscreen.ui
 
 import com.code.sliski.api.Client
 import com.code.sliski.api.model.Post
-import com.code.sliski.preference.PreferencesManager
+import com.code.sliski.mvp.Presenter
 import rx.Scheduler
 import rx.Subscriber
 import rx.Subscription
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
-import java.util.*
 
 class PostListFragmentPresenter(private val client: Client,
-                                private val preferencesManager: PreferencesManager,
+                                private val userId: Long,
                                 private var postList: List<Post>,
                                 private val schedulerIO: Scheduler,
-                                private val schedulerUI: Scheduler) : PostListFragmentMVP.Presenter {
-
-    private var view: PostListFragmentMVP.View? = null
+                                private val schedulerUI: Scheduler) : Presenter<View>() {
 
     private lateinit var postsSubscription: Subscription
 
-    override fun present() {
-        if (postList.isNotEmpty()) {
-            view?.showPosts(postList)
-        } else {
-            val userId = preferencesManager.getUserId()
-            val posts = client.getPosts(userId)
-            postsSubscription = posts.subscribeOn(schedulerIO)
-                                     .map { it.posts }
-                                     .observeOn(schedulerUI)
-                                     .subscribe(PostSubscriber())
-        }
+    fun present() = if (postList.isNotEmpty()) {
+        view?.showPosts(postList)
+    } else {
+        val posts = client.getPosts(userId)
+        postsSubscription = posts.subscribeOn(schedulerIO)
+                                 .map { it.posts }
+                                 .observeOn(schedulerUI)
+                                 .subscribe(PostSubscriber())
     }
 
-    override fun onItemClick(position: Int, isTablet: Boolean) {
-        val post = postList[position]
-        if (isTablet)
-            view?.notifyOnPostClicked(post)
-        else
-            view?.showPostDetailsScreen(post)
-    }
+    fun onItemClick(position: Int, isTablet: Boolean) = if (isTablet)
+        view?.notifyOnPostClicked(postList[position])
+    else
+        view?.showPostDetailsScreen(postList[position])
 
-    override fun attach(view: PostListFragmentMVP.View?) {
-        this.view = view
-    }
-
-    override fun detach() {
-        this.view = null
-    }
-
-    override fun unsubscribe() {
+    fun unsubscribe() {
         if (postsSubscription.isUnsubscribed) postsSubscription.unsubscribe()
     }
 

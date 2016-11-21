@@ -3,7 +3,6 @@ package com.code.sliski.postlistscreen.di
 import com.code.sliski.api.Client
 import com.code.sliski.api.StackoverflowApi
 import com.code.sliski.api.StackoverflowClient
-import com.code.sliski.postlistscreen.ui.PostListFragmentMVP
 import com.code.sliski.postlistscreen.ui.PostListFragmentPresenter
 import com.code.sliski.preference.PreferencesManager
 import dagger.Module
@@ -20,9 +19,9 @@ class PostListModule {
     @Provides
     @PostListScope
     fun providePostListFragmentPresenter(client: Client,
-                                         preferencesManager: PreferencesManager): PostListFragmentMVP.Presenter =
+                                         preferencesManager: PreferencesManager): PostListFragmentPresenter =
             PostListFragmentPresenter(client,
-                                      preferencesManager,
+                                      preferencesManager.getUserId(),
                                       emptyList(),
                                       Schedulers.io(),
                                       AndroidSchedulers.mainThread())

@@ -6,7 +6,7 @@ import spock.lang.Unroll
 
 class MainActivityPresenterTest extends Specification {
 
-    MainActivityMVP.View view = Mock(MainActivityMVP.View)
+    View view = Mock(View)
 
     MainActivityPresenter tested
 

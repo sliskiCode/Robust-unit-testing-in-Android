@@ -3,7 +3,7 @@ package com.code.sliski.loginscreen.ui
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
+import android.view.View as AndroidView
 import android.view.ViewGroup
 import com.code.sliski.App
 import com.code.sliski.R.layout.user_id_fragment
@@ -17,11 +17,10 @@ import com.code.sliski.userinfoscreen.ui.UserInfoFragment
 import kotlinx.android.synthetic.main.user_id_fragment.*
 import javax.inject.Inject
 
-class LoginFragment : Fragment(),
-                      LoginFragmentMVP.View {
+class LoginFragment : Fragment(), View {
 
     @Inject
-    lateinit var presenter: LoginFragmentMVP.Presenter
+    lateinit var presenter: LoginFragmentPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +33,7 @@ class LoginFragment : Fragment(),
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? =
+                              savedInstanceState: Bundle?): AndroidView? =
             inflater.inflate(user_id_fragment, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

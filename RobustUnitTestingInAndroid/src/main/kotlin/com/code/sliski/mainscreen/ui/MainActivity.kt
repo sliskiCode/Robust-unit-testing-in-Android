@@ -13,11 +13,10 @@ import com.code.sliski.mainscreen.di.MainModule
 import com.code.sliski.userinfoscreen.ui.UserInfoFragment
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(),
-                     MainActivityMVP.View {
+class MainActivity : AppCompatActivity(), View {
 
     @Inject
-    lateinit var presenter: MainActivityMVP.Presenter
+    lateinit var presenter: MainActivityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
