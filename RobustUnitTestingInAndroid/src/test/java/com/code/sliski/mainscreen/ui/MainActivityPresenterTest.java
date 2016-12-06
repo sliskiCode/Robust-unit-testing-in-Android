@@ -20,8 +20,7 @@ public class MainActivityPresenterTest {
         mainActivityPresenter.attach(mainActivityPresenterView);
 
         // WHEN
-        Bundle state = mock(Bundle.class);
-        mainActivityPresenter.present(state);
+        mainActivityPresenter.present(mock(Bundle.class));
 
         // THEN
         verifyZeroInteractions(mainActivityPresenterView);
