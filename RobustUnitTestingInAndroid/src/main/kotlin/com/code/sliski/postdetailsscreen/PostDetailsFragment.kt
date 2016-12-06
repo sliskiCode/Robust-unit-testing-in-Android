@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.code.sliski.R
-import com.code.sliski.api.model.Post
+import com.code.sliski.postlistscreen.ui.model.PresentationPost
 import kotlinx.android.synthetic.main.details_fragment.*
 
 class PostDetailsFragment : Fragment(),
@@ -15,7 +15,7 @@ class PostDetailsFragment : Fragment(),
     companion object {
         val POST: String = "POST"
 
-        fun getInstance(post: Post): PostDetailsFragment {
+        fun getInstance(post: PresentationPost): PostDetailsFragment {
             val fragment = PostDetailsFragment()
             val arguments = Bundle()
             arguments.putParcelable(POST, post)
@@ -24,7 +24,7 @@ class PostDetailsFragment : Fragment(),
         }
     }
 
-    private lateinit var post: Post
+    private lateinit var post: PresentationPost
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -38,7 +38,7 @@ class PostDetailsFragment : Fragment(),
         updateView()
     }
 
-    override fun onPostClick(post: Post) {
+    override fun onPostClick(post: PresentationPost) {
         this.post = post
         updateView()
     }

@@ -1,8 +1,8 @@
 package com.code.sliski.postdetailsscreen
 
-import com.code.sliski.api.model.Post
+import com.code.sliski.postlistscreen.ui.model.PresentationPost
 
 interface OnPostClickListener {
 
-    fun onPostClick(post: Post)
+    fun onPostClick(post: PresentationPost)
 }

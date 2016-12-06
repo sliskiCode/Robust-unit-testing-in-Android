@@ -11,7 +11,7 @@ import com.code.sliski.R.layout.user_info_fragment
 import com.code.sliski.extension.addChildFragment
 import com.code.sliski.extension.isTablet
 import com.code.sliski.postdetailsscreen.PostDetailsFragment
-import com.code.sliski.postlistscreen.ui.PostListFragment
+import com.code.sliski.postlistscreen.ui.view.PostListFragment
 import com.code.sliski.userinfoscreen.di.DaggerUserInfoComponent
 import com.code.sliski.userinfoscreen.di.UserInfoModule
 import javax.inject.Inject

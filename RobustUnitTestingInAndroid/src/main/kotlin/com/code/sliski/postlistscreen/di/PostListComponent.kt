@@ -1,7 +1,7 @@
 package com.code.sliski.postlistscreen.di
 
 import com.code.sliski.AppComponent
-import com.code.sliski.postlistscreen.ui.PostListFragment
+import com.code.sliski.postlistscreen.ui.view.PostListFragment
 import dagger.Component
 
 @PostListScope

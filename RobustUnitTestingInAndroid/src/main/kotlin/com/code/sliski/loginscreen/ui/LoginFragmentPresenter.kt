@@ -6,11 +6,10 @@ import com.code.sliski.preference.PreferencesManager
 
 class LoginFragmentPresenter(private val preferencesManager: PreferencesManager) : Presenter<View>() {
 
-    fun present(userId: String) =
-            if (userId.isPositiveNumber()) {
-                preferencesManager.saveUserId(userId.toLong())
-                view?.showUserInfoScreen()
-            } else {
-                view?.showBadFormatInfo()
-            }
+    fun present(userId: String) = if (userId.isPositiveNumber()) {
+        preferencesManager.saveUserId(userId.toLong())
+        view?.showUserInfoScreen()
+    } else {
+        view?.showBadFormatInfo()
+    }
 }
