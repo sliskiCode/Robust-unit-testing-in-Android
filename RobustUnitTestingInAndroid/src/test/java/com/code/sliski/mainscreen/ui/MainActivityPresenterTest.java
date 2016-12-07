@@ -28,61 +28,47 @@ public class MainActivityPresenterTest {
 
     public static class IndividualTests {
 
-        private MainActivityPresenter mainActivityPresenter;
+        MainActivityPresenter tested;
+        View viewMock = mock(View.class);
 
-        // Mocks
-        private View mainActivityPresenterView;
-
-        @Test
-        public void presentTestShouldNotInteractWithView() throws Exception {
-            // GIVEN
-            mainActivityPresenterView = mock(View.class);
-            mainActivityPresenter = new MainActivityPresenter(1L, UserRole.HERO, userRoleDictionary);
-            mainActivityPresenter.attach(mainActivityPresenterView);
-
-            // WHEN
-            mainActivityPresenter.present(mock(Bundle.class));
-
-            // THEN
-            verifyZeroInteractions(mainActivityPresenterView);
+        void setupPresenter(long userId, UserRole userRole) {
+            tested = new MainActivityPresenter(userId, userRole, userRoleDictionary);
+            tested.attach(viewMock);
         }
 
         @Test
-        public void presentTestShouldShowLoginFragment() throws Exception {
-            // GIVEN
-            mainActivityPresenterView = mock(View.class);
-            mainActivityPresenter = new MainActivityPresenter(0L, UserRole.HERO, userRoleDictionary);
-            mainActivityPresenter.attach(mainActivityPresenterView);
+        public void notInteractWithView() throws Exception {
+            setupPresenter(1L, UserRole.HERO);
 
-            // WHEN
-            mainActivityPresenter.present(null);
+            tested.present(mock(Bundle.class));
 
-            // THEN
-            verify(mainActivityPresenterView, times(1)).showLoginScreen();
+            verifyZeroInteractions(viewMock);
         }
 
         @Test
-        public void presentTestShouldShowUserInfoScreen() throws Exception {
-            // GIVEN
-            mainActivityPresenterView = mock(View.class);
-            mainActivityPresenter = new MainActivityPresenter(1L, UserRole.HERO, userRoleDictionary);
-            mainActivityPresenter.attach(mainActivityPresenterView);
+        public void showLoginFragment() throws Exception {
+            setupPresenter(0L, UserRole.HERO);
 
-            // WHEN
-            mainActivityPresenter.present(null);
+            tested.present(null);
 
-            // THEN
-            verify(mainActivityPresenterView, times(1)).showUserInfoScreen();
+            verify(viewMock, times(1)).showLoginScreen();
+        }
+
+        @Test
+        public void showUserInfoScreen() throws Exception {
+            setupPresenter(1L, UserRole.HERO);
+
+            tested.present(null);
+
+            verify(viewMock, times(1)).showUserInfoScreen();
         }
     }
 
     @RunWith(Parameterized.class)
     public static class ParameterizedTests {
 
-        private MainActivityPresenter mainActivityPresenter;
-
-        // Mocks
-        private View mainActivityPresenterView;
+        MainActivityPresenter tested;
+        View mockView = mock(View.class);
 
         @Parameters(name = "{2}")
         public static Collection<Object[]> data() {
@@ -96,10 +82,10 @@ public class MainActivityPresenterTest {
             });
         }
 
-        private long userId;
-        private UserRole userRole;
-        private String message;
-        private int times;
+        long userId;
+        UserRole userRole;
+        String message;
+        int times;
 
         public ParameterizedTests(long userId, UserRole userRole, String message, int times) {
             this.userId = userId;
@@ -109,17 +95,13 @@ public class MainActivityPresenterTest {
         }
 
         @Test
-        public void presentTestShouldDisplay() {
-            // GIVEN
-            mainActivityPresenterView = mock(View.class);
-            mainActivityPresenter = new MainActivityPresenter(userId, userRole, userRoleDictionary);
-            mainActivityPresenter.attach(mainActivityPresenterView);
+        public void displayMessage() {
+            tested = new MainActivityPresenter(userId, userRole, userRoleDictionary);
+            tested.attach(mockView);
 
-            // WHEN
-            mainActivityPresenter.present(null);
+            tested.present(null);
 
-            // THEN
-            verify(mainActivityPresenterView, times(times)).displayMessage(message);
+            verify(mockView, times(times)).displayMessage(message);
         }
     }
 }
