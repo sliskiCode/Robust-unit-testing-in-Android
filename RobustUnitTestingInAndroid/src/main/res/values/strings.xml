@@ -6,4 +6,7 @@
     <string name="user_id_hint">User id</string>
     <string name="default_user_id">1408086</string>
     <string name="go">GO!</string>
+    <string name="hero_hello">You are a Hero.</string>
+    <string name="grunt_hello">You are a Grunt.</string>
+    <string name="peon_hello">You are a Peon.</string>
 </resources>

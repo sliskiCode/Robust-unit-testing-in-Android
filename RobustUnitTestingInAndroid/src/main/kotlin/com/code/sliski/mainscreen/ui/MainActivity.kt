@@ -7,6 +7,7 @@ import com.code.sliski.R.id.container
 import com.code.sliski.R.layout.activity_main
 import com.code.sliski.extension.addFragment
 import com.code.sliski.extension.application
+import com.code.sliski.extension.showMessage
 import com.code.sliski.loginscreen.ui.LoginFragment
 import com.code.sliski.mainscreen.di.DaggerMainComponent
 import com.code.sliski.mainscreen.di.MainModule
@@ -46,6 +47,10 @@ class MainActivity : AppCompatActivity(), View {
 
     override fun showUserInfoScreen() {
         addFragment(container, UserInfoFragment())
+    }
+
+    override fun displayMessage(message: String) {
+        showMessage(message)
     }
 
     override fun onBackPressed() {
