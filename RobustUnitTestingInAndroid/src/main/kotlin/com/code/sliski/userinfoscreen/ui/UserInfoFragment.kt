@@ -56,7 +56,7 @@ class UserInfoFragment : Fragment(), View {
     }
 
     override fun showPostDetailsScreen() {
-        val detailsFragment = PostDetailsFragment()
+        val detailsFragment = PostDetailsFragment.getInstance(null)
         postListFragment.onPostClickListener = detailsFragment
         addChildFragment(preview_container, detailsFragment)
     }

@@ -15,7 +15,7 @@ class PostDetailsFragment : Fragment(),
     companion object {
         val POST: String = "POST"
 
-        fun getInstance(post: PresentationPost): PostDetailsFragment {
+        fun getInstance(post: PresentationPost?): PostDetailsFragment {
             val fragment = PostDetailsFragment()
             val arguments = Bundle()
             arguments.putParcelable(POST, post)
@@ -24,7 +24,7 @@ class PostDetailsFragment : Fragment(),
         }
     }
 
-    private lateinit var post: PresentationPost
+    private var post: PresentationPost? = null
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -44,7 +44,7 @@ class PostDetailsFragment : Fragment(),
     }
 
     private fun updateView() {
-        score.text = post.score.toString()
-        link.text = post.link
+        score.text = post?.score.toString()
+        link.text = post?.link
     }
 }
