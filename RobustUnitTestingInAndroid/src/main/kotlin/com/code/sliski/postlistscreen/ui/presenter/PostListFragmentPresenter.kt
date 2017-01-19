@@ -4,47 +4,44 @@ import com.code.sliski.mvp.Presenter
 import com.code.sliski.postlistscreen.ui.mapper.PostPresentationMapper
 import com.code.sliski.postlistscreen.ui.model.PresentationPost
 import com.code.sliski.postlistscreen.ui.view.View
-import rx.Scheduler
-import rx.Subscriber
-import rx.Subscription
+import io.reactivex.Scheduler
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 
-class PostListFragmentPresenter(private val provider: PostListProvider,
+class PostListFragmentPresenter(provider: PostListProvider,
                                 private val mapper: PostPresentationMapper,
                                 private var postList: List<PresentationPost>,
-                                private val schedulerUI: Scheduler) : Presenter<View>() {
+                                schedulerUI: Scheduler) : Presenter<View>() {
 
-    private lateinit var subscription: Subscription
+    private val single = provider.postList()
+                                 .map { mapper.map(it) }
+                                 .observeOn(schedulerUI)
 
-    fun present() = if (postList.isNotEmpty()) {
-        view?.showPosts(postList)
-    } else {
-        subscription = provider
-                .postList()
-                .map { mapper.map(it) }
-                .observeOn(schedulerUI)
-                .subscribe(PostSubscriber())
-    }
+    private lateinit var disposable: Disposable
+
+    fun present() = single.subscribe(PostSubscriber())
 
     fun onItemClick(position: Int, isTablet: Boolean) = if (isTablet)
         view?.notifyOnPostClicked(postList[position])
     else
         view?.showPostDetailsScreen(postList[position])
 
-    fun unsubscribe() {
-        if (subscription.isUnsubscribed) subscription.unsubscribe()
+    fun dispose() {
+        if (!disposable.isDisposed) disposable.dispose()
     }
 
-    inner class PostSubscriber : Subscriber<List<PresentationPost>>() {
-        override fun onCompleted() {
+    inner class PostSubscriber : SingleObserver<List<PresentationPost>> {
+        override fun onError(e: Throwable) {
+            view?.showError(e.message!!)
+        }
+
+        override fun onSuccess(result: List<PresentationPost>) {
+            postList = result
             view?.showPosts(postList)
         }
 
-        override fun onNext(next: List<PresentationPost>) {
-            postList = next
-        }
-
-        override fun onError(e: Throwable) {
-            view?.showError(e.message!!)
+        override fun onSubscribe(d: Disposable) {
+            disposable = d
         }
     }
 }

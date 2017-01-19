@@ -3,20 +3,20 @@ package com.code.sliski.postlistscreen.domain
 import com.code.sliski.api.Client
 import com.code.sliski.api.model.Post
 import com.code.sliski.postlistscreen.ui.presenter.PostListProvider
-import rx.Observable
-import rx.Scheduler
+import io.reactivex.Scheduler
+import io.reactivex.Single
 
 class PostListDomain(private val client: Client,
                      private val userId: Long,
                      private val schedulerIO: Scheduler) : PostListProvider {
 
-    override fun postList(): Observable<List<Post>> = client
+    override fun postList(): Single<List<Post>> = client
             .getPosts(userId)
             .subscribeOn(schedulerIO)
             .map { it.posts }
-            .flatMapIterable { it }
-            .filter { it.score > 5 }
-            .toSortedList(::descending)
+            .map(::scoreMoreThanFive)
+            .map(::scoreDescending)
 }
 
-private fun descending(post1: Post, post2: Post) = post2.score.compareTo(post1.score)
+private fun scoreMoreThanFive(posts: List<Post>) = posts.filter { it.score > 5 }
+private fun scoreDescending(posts: List<Post>) = posts.sortedBy(Post::score)

@@ -1,9 +1,9 @@
 package com.code.sliski.postlistscreen.ui.presenter
 
 import com.code.sliski.api.model.Post
-import rx.Observable
+import io.reactivex.Single
 
 interface PostListProvider {
 
-    fun postList(): Observable<List<Post>>
+    fun postList(): Single<List<Post>>
 }

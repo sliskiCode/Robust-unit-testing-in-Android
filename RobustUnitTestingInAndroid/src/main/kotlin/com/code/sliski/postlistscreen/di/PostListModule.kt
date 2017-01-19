@@ -9,11 +9,11 @@ import com.code.sliski.postlistscreen.ui.presenter.PostListFragmentPresenter
 import com.code.sliski.preference.PreferencesManager
 import dagger.Module
 import dagger.Provides
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 
 @Module
 class PostListModule {
@@ -22,7 +22,9 @@ class PostListModule {
     @PostListScope
     fun providePostListFragmentPresenter(client: Client,
                                          preferencesManager: PreferencesManager): PostListFragmentPresenter =
-            PostListFragmentPresenter(PostListDomain(client, preferencesManager.getUserId(), Schedulers.io()),
+            PostListFragmentPresenter(PostListDomain(client,
+                                                     preferencesManager.getUserId(),
+                                                     Schedulers.io()),
                                       PostPresentationMapperImpl,
                                       emptyList(),
                                       AndroidSchedulers.mainThread())
@@ -37,7 +39,7 @@ class PostListModule {
             Retrofit.Builder()
                     .baseUrl("https://api.stackexchange.com/2.2/")
                     .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
                     .create(StackoverflowApi::class.java)
 }

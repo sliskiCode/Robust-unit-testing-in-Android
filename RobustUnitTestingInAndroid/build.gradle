@@ -1,13 +1,13 @@
 buildscript {
-    ext.kotlin_version = '1.0.5-2'
-    ext.support_version = '25.0.1'
+    ext.kotlin_version = '1.0.6'
+    ext.support_version = '25.1.0'
     ext.dagger_version = '2.5'
-    ext.retrofit_version = '2.1.0'
+    ext.retrofit_version = '2.2.0-SNAPSHOT'
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.0-beta1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
         classpath 'org.codehaus.groovy:groovy-android-gradle-plugin:1.1.0'
@@ -28,7 +28,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25'
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         applicationId "com.code.sliski.ui"
@@ -63,8 +63,9 @@ dependencies {
     // Retrofit
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    compile "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
-    compile 'io.reactivex:rxandroid:1.2.1'
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.4'
 
     // Preferences
     compile 'com.github.talenguyen:prettysharedpreferences:1.0.2'

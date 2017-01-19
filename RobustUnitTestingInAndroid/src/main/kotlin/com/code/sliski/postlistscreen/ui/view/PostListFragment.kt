@@ -50,7 +50,7 @@ class PostListFragment : ListFragment(), View, AdapterView.OnItemClickListener {
     override fun onDestroy() {
         super.onDestroy()
         if (activity.isFinishing) {
-            presenter.unsubscribe()
+            presenter.dispose()
             application<App>().releasePostListComponent()
         }
     }
